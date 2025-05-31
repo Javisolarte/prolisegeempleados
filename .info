@@ -1,0 +1,36 @@
+CREATE TABLE empleados (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    cedula VARCHAR(20) UNIQUE NOT NULL,
+    direccion TEXT,
+    celular VARCHAR(20),
+    email VARCHAR(100),  -- Agregada para contacto formal
+    fecha_nacimiento DATE,  -- Agregada para calcular edad
+    genero ENUM('Masculino', 'Femenino', 'Otro'),  -- Agregada para estadísticas
+    estado_civil ENUM('Soltero', 'Casado', 'Divorciado', 'Viudo'),
+    
+    formacion TEXT,
+    experiencia TEXT,
+    puesto_asignado VARCHAR(100),
+    tipo_contrato ENUM('Indefinido', 'Temporal', 'Practicante', 'Freelance', 'Otro') DEFAULT 'Indefinido',
+    sueldo DECIMAL(10,2),
+    fecha_ingreso DATE,
+
+    hoja_vida_ruta VARCHAR(255),  -- Ruta al archivo PDF de la hoja de vida
+    foto_perfil_ruta VARCHAR(255),  -- Ruta a la foto de perfil
+
+    estado ENUM('Activo', 'Inactivo') DEFAULT 'Activo',
+    observaciones TEXT,  -- Campo adicional para anotaciones generales
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE lugares_seguridad (
+    id_lugar INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
+    telefono VARCHAR(20),
+    numero_camaras INT DEFAULT 0,
+    numero_guardias INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
