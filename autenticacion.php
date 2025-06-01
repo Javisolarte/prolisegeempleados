@@ -1,5 +1,8 @@
 <?php
-// verificar_login.php
+// Mostrar todos los errores (para depuración)
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 // Incluir el archivo de configuración de la base de datos 
 include "db_config.php";
@@ -16,6 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Preparar la consulta
     $stmt = mysqli_prepare($conexion, $query);
     
+    if ($stmt === false) {
+        die("Error al preparar la consulta: " . mysqli_error($conexion));
+    }
+
     // Vincular los parámetros a la consulta
     mysqli_stmt_bind_param($stmt, "ss", $cedula, $contrasena);
     
