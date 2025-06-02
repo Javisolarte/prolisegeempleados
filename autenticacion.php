@@ -13,8 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cedula = $_POST['usuario'];
     $contrasena = $_POST['contrasena'];
 
-    // Consulta para verificar las credenciales en la tabla "usuarios"
-    $query = "SELECT * FROM usuarios WHERE cedula = ? AND contrasena = ?";
+    // Consulta para verificar las credenciales y obtener el rol
+    $query = "SELECT rol FROM usuarios WHERE cedula = ? AND contrasena = ?";
     
     // Preparar la consulta
     $stmt = mysqli_prepare($conexion, $query);
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Error al preparar la consulta: " . mysqli_error($conexion));
     }
 
-    // Vincular los parámetros a la consulta
+    // Vincular los parámetros
     mysqli_stmt_bind_param($stmt, "ss", $cedula, $contrasena);
     
     // Ejecutar la consulta
@@ -32,11 +32,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener el resultado
     $result = mysqli_stmt_get_result($stmt);
 
-    if (mysqli_num_rows($result) > 0) {
+    if ($row = mysqli_fetch_assoc($result)) {
         // Inicio de sesión exitoso
         session_start();
         $_SESSION['usuario'] = $cedula;
-        header("Location: index.html");
+        $_SESSION['rol'] = $row['rol']; // Guardar el rol en sesión si lo necesitas
+
+        // Redireccionar según el rol
+        if ($row['rol'] === 'administrador') {
+            header("Location: index.html");
+        } elseif ($row['rol'] === 'usuario') {
+            header("Location: index-user.html");
+        } else {
+            echo "Rol no reconocido.";
+        }
+
         exit();
     } else {
         // Credenciales incorrectas
@@ -45,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p><a href='login.html'>Volver al inicio de sesión</a></p>";
     }
 
-    // Cerrar la conexión
+    // Cerrar conexión
     mysqli_stmt_close($stmt);
     mysqli_close($conexion);
 } else {
