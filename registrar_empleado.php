@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once 'db_config.php'; // Define $conn
+require_once 'db_config.php'; // Aquí defines $conexion
 
 // Carpetas de destino
 $carpetaHojasDeVida = "hojasdevida/";
@@ -33,7 +33,7 @@ $observaciones = $_POST['observaciones'];
 
 // Validar que no esté registrada la cédula
 $verificaSql = "SELECT id FROM empleados WHERE cedula = ?";
-$verificaStmt = $conn->prepare($verificaSql);
+$verificaStmt = $conexion->prepare($verificaSql);
 $verificaStmt->bind_param("s", $cedula);
 $verificaStmt->execute();
 $verificaStmt->store_result();
@@ -79,7 +79,7 @@ $sql = "INSERT INTO empleados (
     hoja_vida_ruta, foto_perfil_ruta, estado, observaciones
 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-$stmt = $conn->prepare($sql);
+$stmt = $conexion->prepare($sql);
 $stmt->bind_param(
     "ssssssssssssdsssss",
     $nombre, $cedula, $direccion, $celular, $email, $fecha_nacimiento, $genero, $estado_civil,
@@ -94,7 +94,7 @@ if ($stmt->execute()) {
             window.location.href = 'agregar_empleado.html';
         } else {
             alert('Empleado registrado exitosamente.');
-            window.location.href = 'todos-empleados.html'; // Cambia por la página de destino final
+            window.location.href = 'todos-empleados.html';
         }
     </script>";
 } else {
@@ -102,5 +102,5 @@ if ($stmt->execute()) {
 }
 
 $stmt->close();
-$conn->close();
+$conexion->close();
 ?>
