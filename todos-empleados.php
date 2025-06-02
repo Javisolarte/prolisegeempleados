@@ -73,14 +73,14 @@
   <div class="left-sidebar-pro">
     <nav id="sidebar" class="">
         <div class="sidebar-header">
-            <a href="index.php"><img class="main-logo" src="img/logo/logosn.png" style="height: 100px;" alt="" /></a> <br><br>
-            <strong><a href="index.php"><img src="img/logo/logosn.png" alt="" /></a></strong>
+            <a href="index-admin.php"><img class="main-logo" src="img/logo/logosn.png" style="height: 100px;" alt="" /></a> <br><br>
+            <strong><a href="index-admin.php"><img src="img/logo/logosn.png" alt="" /></a></strong>
         </div>
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
                     <li>
-                        <a title="Inicio" href="index.php" aria-expanded="false">
+                        <a title="Inicio" href="index-admin.php" aria-expanded="false">
                             <span class="educate-icon educate-home icon-wrap" aria-hidden="true"></span> 
                             <span class="mini-click-non">Inicio</span>
                         </a>
@@ -121,7 +121,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.php"><img class="main-logo" src="img/logo/logo.png" style="height: 30px;" alt="" /></a>
+                        <a href="index-admin.php"><img class="main-logo" src="img/logo/logo.png" style="height: 30px;" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -183,7 +183,7 @@
                     <nav id="dropdown">
                         <ul class="mobile-menu-nav">
                             <li>
-                                <a href="index.php">Inicio</a>
+                                <a href="index-admin.php">Inicio</a>
                             </li>
                             <li>
                                 <a data-toggle="collapse" data-target="#menuEmpleados" href="#">Empleados 
@@ -231,7 +231,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
-                                            <li><a href="index.php">Inicio</a> <span class="bread-slash">/</span>
+                                            <li><a href="index-admin.php">Inicio</a> <span class="bread-slash">/</span>
                                             </li>
                                             
                                             </li>
