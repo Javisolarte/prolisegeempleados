@@ -2,36 +2,51 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+require_once 'db_config.php';
 
-require_once 'db_config.php'; // Aquí defines $conexion
-
-// Carpetas de destino
 $carpetaHojasDeVida = "hojasdevida/";
 $carpetaFotos = "fotos/";
 
-// Crear carpetas si no existen
 if (!file_exists($carpetaHojasDeVida)) mkdir($carpetaHojasDeVida, 0777, true);
 if (!file_exists($carpetaFotos)) mkdir($carpetaFotos, 0777, true);
 
-// Recoger datos del formulario
-$nombre = strtoupper(trim($_POST['nombre']));
-$cedula = $_POST['cedula'];
-$direccion = $_POST['direccion'];
-$celular = $_POST['celular'];
-$email = $_POST['email'];
-$fecha_nacimiento = $_POST['fecha_nacimiento'];
-$genero = $_POST['genero'];
-$estado_civil = $_POST['estado_civil'];
-$formacion = $_POST['formacion'];
-$experiencia = $_POST['experiencia'];
-$puesto_asignado = $_POST['puesto_asignado'];
-$tipo_contrato = $_POST['tipo_contrato'];
-$sueldo = $_POST['sueldo'];
-$fecha_ingreso = $_POST['fecha_ingreso'];
-$estado = $_POST['estado'];
-$observaciones = $_POST['observaciones'];
+// VALIDAR CAMPOS OBLIGATORIOS
+if (!isset($_POST['cedula']) || trim($_POST['cedula']) == '') {
+    die("Error: la cédula es obligatoria.");
+}
 
-// Procesar hoja de vida
+$cedula = trim($_POST['cedula']);
+
+// 1. VERIFICAR SI YA EXISTE
+$stmtCheck = $conexion->prepare("SELECT id FROM empleados WHERE cedula = ?");
+$stmtCheck->bind_param("s", $cedula);
+$stmtCheck->execute();
+$stmtCheck->store_result();
+
+if ($stmtCheck->num_rows > 0) {
+    $stmtCheck->close();
+    die("Error: Ya existe un empleado con la cédula '$cedula'.");
+}
+$stmtCheck->close();
+
+// 2. RECOGER LOS DEMÁS DATOS
+$nombre = strtoupper(trim($_POST['nombre'] ?? ''));
+$direccion = $_POST['direccion'] ?? '';
+$celular = $_POST['celular'] ?? '';
+$email = $_POST['email'] ?? '';
+$fecha_nacimiento = $_POST['fecha_nacimiento'] ?? '';
+$genero = $_POST['genero'] ?? '';
+$estado_civil = $_POST['estado_civil'] ?? '';
+$formacion = $_POST['formacion'] ?? '';
+$experiencia = $_POST['experiencia'] ?? '';
+$puesto_asignado = $_POST['puesto_asignado'] ?? '';
+$tipo_contrato = $_POST['tipo_contrato'] ?? '';
+$sueldo = floatval($_POST['sueldo'] ?? 0);
+$fecha_ingreso = $_POST['fecha_ingreso'] ?? '';
+$estado = $_POST['estado'] ?? '';
+$observaciones = $_POST['observaciones'] ?? '';
+
+// 3. PROCESAR ARCHIVOS
 $hoja_vida_ruta = NULL;
 if (isset($_FILES['hoja_vida_ruta']) && $_FILES['hoja_vida_ruta']['error'] == 0) {
     $ext = pathinfo($_FILES['hoja_vida_ruta']['name'], PATHINFO_EXTENSION);
@@ -45,7 +60,6 @@ if (isset($_FILES['hoja_vida_ruta']) && $_FILES['hoja_vida_ruta']['error'] == 0)
     }
 }
 
-// Procesar foto de perfil
 $foto_perfil_ruta = NULL;
 if (isset($_FILES['foto_perfil_ruta']) && $_FILES['foto_perfil_ruta']['error'] == 0) {
     $ext = pathinfo($_FILES['foto_perfil_ruta']['name'], PATHINFO_EXTENSION);
@@ -59,7 +73,7 @@ if (isset($_FILES['foto_perfil_ruta']) && $_FILES['foto_perfil_ruta']['error'] =
     }
 }
 
-// Insertar en la base de datos
+// 4. INSERTAR
 $sql = "INSERT INTO empleados (
     nombre, cedula, direccion, celular, email, fecha_nacimiento, genero, estado_civil,
     formacion, experiencia, puesto_asignado, tipo_contrato, sueldo, fecha_ingreso,
@@ -75,17 +89,13 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
-    // Redirigir con mensaje por GET para evitar reenvío
+    $stmt->close();
+    $conexion->close();
     header("Location: todos-empleados.html?registrado=1");
     exit;
 } else {
-    if ($stmt->errno == 1062) {
-        echo "Error: Ya existe un empleado con la cédula '$cedula'.";
-    } else {
-        echo "Error al guardar en la base de datos: " . $stmt->error;
-    }
+    echo "Error al guardar en la base de datos: " . $stmt->error;
+    $stmt->close();
+    $conexion->close();
 }
-
-$stmt->close();
-$conexion->close();
 ?>
