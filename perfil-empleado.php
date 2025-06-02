@@ -114,7 +114,7 @@
                                             class="mini-sub-pro">Todos los lugares</span></a></li>
                                 <li><a title="Agregar lugar" href="agregar-lugar.php"><span
                                             class="mini-sub-pro">Agregar lugar</span></a></li>
-                                <li><a title="Información del lugar" href="info-lugar.html"><span
+                                <li><a title="Información del lugar" href="info-lugar.php"><span
                                             class="mini-sub-pro">Información del lugar</span></a></li>
                             </ul>
                         </li>
