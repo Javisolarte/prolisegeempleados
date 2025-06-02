@@ -380,7 +380,7 @@
                                         // Aquí insertamos el HTML por cada empleado
                                         ?>
                                         <div class="product-tab-list tab-pane fade active in" id="description">
-                                            <h1>EMPLEADOS ASIGNADOS A ESTE LUGAR</h1>
+                                            
                                             <div class="row">
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                     <div class="review-content-section">
@@ -400,6 +400,10 @@
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                                 <div class="address-hr biography">
                                                                     <p><b>Telefono</b><br /> <?php echo $empleado['celular']; ?>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="address-hr biography">
+                                                                    <p><b>Cedula</b><br /> <?php echo $empleado['cedula']; ?>
                                                                     </p>
                                                                 </div>
                                                             </div>
