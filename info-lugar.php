@@ -380,6 +380,7 @@
                                         // Aquí insertamos el HTML por cada empleado
                                         ?>
                                         <div class="product-tab-list tab-pane fade active in" id="description">
+                                            <h1>EMPLEADOS ASIGNADOS A ESTE LUGAR</h1>
                                             <div class="row">
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                     <div class="review-content-section">
@@ -553,12 +554,11 @@
         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer-copy-right">
-                            <p>Copyright © 2018. All rights reserved. Template by <a
-                                    href="https://colorlib.com/wp/templates/">Colorlib</a></p>
+                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="footer-copy-right">
+                                <p>Copyright © 2025. <a href="https://proliseg.com">PROLISEG LTDA</a></p>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
