@@ -310,7 +310,19 @@ if ($resultado && $resultado->num_rows > 0) {
                 <div class="course-des">
                     <p><span><i class="fa fa-user"></i></span> <b>Experiencia:</b> ' . $experiencia . '</p>
                     <p><span><i class="fa fa-building"></i></span> <b>Lugar:</b> ' . $nombre_lugar . '</p>
-                </di
+                </div>
+                <div class="product-buttons text-center">
+                    <button type="button" class="button-default cart-btn">Leer Más</button>
+                </div>
+            </div>
+        </div>';
+    }
+
+    echo '</div></div></div>';
+} else {
+    echo "<p class='text-center'>No hay empleados registrados aún.</p>";
+}
+?>
 
 
        <div class="footer-copyright-area">
