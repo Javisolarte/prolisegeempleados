@@ -85,12 +85,12 @@
                         </a>
                     </li>
                     <li>
-                        <a class="has-arrow" href="todos-empleados.html" aria-expanded="false">
+                        <a class="has-arrow" href="todos-empleados.php" aria-expanded="false">
                             <span class="educate-icon educate-student icon-wrap"></span> 
                             <span class="mini-click-non">Empleados</span>
                         </a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="Todos los empleados" href="todos-empleados.html"><span class="mini-sub-pro">Todos los empleados</span></a></li>
+                            <li><a title="Todos los empleados" href="todos-empleados.php"><span class="mini-sub-pro">Todos los empleados</span></a></li>
                             <li><a title="Agregar empleado" href="agregar-empleado.html"><span class="mini-sub-pro">Agregar empleado</span></a></li>
                            
                             <li><a title="Perfil del empleado" href="perfil-empleado.html"><span class="mini-sub-pro">Perfil del empleado</span></a></li>
@@ -189,7 +189,7 @@
                                     <span class="admin-project-icon edu-icon edu-down-arrow"></span>
                                 </a>
                                 <ul id="menuEmpleados" class="collapse dropdown-header-top">
-                                    <li><a href="todos-empleados.html">Todos los empleados</a></li>
+                                    <li><a href="todos-empleados.php">Todos los empleados</a></li>
                                     <li><a href="agregar-empleado.html">Agregar empleado</a></li>
                                     
                                     <li><a href="perfil-empleado.html">Perfil del empleado</a></li>
@@ -243,111 +243,67 @@
                 </div>
             </div>
         </div>
-        <div class="courses-area">
-            <div class="container-fluid">
-               <div class="row">
-    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-        <div class="courses-inner res-mg-b-30">
-            <div class="courses-title">
-                <a href="#"><img src="img/courses/1.png" alt=""></a>
-                <h2>Juan Perez</h2>
-            </div>
-            <div class="courses-alaltic">
-                <span class="cr-ic-r">
-                    <span class="course-icon"><i class="fa fa-user"></i></span> 32 años
-                </span>
-                <span class="cr-ic-r">
-                    <span class="course-icon"><i class="fa fa-map-marker"></i></span> Punto: Zona Industrial
-                </span>
-            </div>
-            <div class="course-des">
-                <p><span><i class="fa fa-user"></i></span> <b>Experiencia:</b> 5 años</p>
-                <p><span><i class="fa fa-building"></i></span> <b>Asignado en:</b> Planta Proliseg Ltda</p>
-            </div>
-            <div class="product-buttons">
-                <button type="button" class="button-default cart-btn">Leer Más</button>
-            </div>
-        </div>
-    </div>
+        <!-- End Welcome area -->   
+         <?php
+include('db_config.php');
 
-    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-        <div class="courses-inner res-mg-b-30">
-            <div class="courses-title">
-                <a href="#"><img src="img/courses/1.png" alt=""></a>
-                <h2>Laura Gómez</h2>
-            </div>
-            <div class="courses-alaltic">
-                <span class="cr-ic-r">
-                    <span class="course-icon"><i class="fa fa-user"></i></span> 29 años
-                </span>
-                <span class="cr-ic-r">
-                    <span class="course-icon"><i class="fa fa-map-marker"></i></span> Punto: Centro Comercial Aventura
-                </span>
-            </div>
-            <div class="course-des">
-                <p><span><i class="fa fa-user"></i></span> <b>Experiencia:</b> 3 años</p>
-                <p><span><i class="fa fa-building"></i></span> <b>Asignado en:</b> Proliseg Ltda</p>
-            </div>
-            <div class="product-buttons">
-                <button type="button" class="button-default cart-btn">Leer Más</button>
-            </div>
-        </div>
-    </div>
+// Consulta todos los empleados
+$sql = "SELECT nombre, fecha_nacimiento, foto_perfil_ruta, experiencia, puesto_asignado FROM empleados";
+$resultado = $conexion->query($sql);
 
-    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-        <div class="courses-inner res-mg-b-30">
-            <div class="courses-title">
-                <a href="#"><img src="img/courses/1.png" alt=""></a>
-                <h2>Mario Díaz</h2>
-            </div>
-            <div class="courses-alaltic">
-                <span class="cr-ic-r">
-                    <span class="course-icon"><i class="fa fa-user"></i></span> 45 años
-                </span>
-                <span class="cr-ic-r">
-                    <span class="course-icon"><i class="fa fa-map-marker"></i></span> Punto: Edificio Ejecutivo
-                </span>
-            </div>
-            <div class="course-des">
-                <p><span><i class="fa fa-user"></i></span> <b>Experiencia:</b> 10 años</p>
-                <p><span><i class="fa fa-building"></i></span> <b>Asignado en:</b> Proliseg Ltda</p>
-            </div>
-            <div class="product-buttons">
-                <button type="button" class="button-default cart-btn">Leer Más</button>
-            </div>
-        </div>
-    </div>
+if ($resultado && $resultado->num_rows > 0) {
+    echo '<div class="courses-area"><div class="container-fluid"><div class="row">';
 
-    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-        <div class="courses-inner res-mg-b-30">
-            <div class="courses-title">
-                <a href="#"><img src="img/courses/1.png" alt=""></a>
-                <h2>Sandra Ríos</h2>
-            </div>
-            <div class="courses-alaltic">
-                <span class="cr-ic-r">
-                    <span class="course-icon"><i class="fa fa-user"></i></span> 38 años
-                </span>
-                <span class="cr-ic-r">
-                    <span class="course-icon"><i class="fa fa-map-marker"></i></span> Punto: Parque Industrial Norte
-                </span>
-            </div>
-            <div class="course-des">
-                <p><span><i class="fa fa-user"></i></span> <b>Experiencia:</b> 6 años</p>
-                <p><span><i class="fa fa-building"></i></span> <b>Asignado en:</b> Proliseg Ltda</p>
-            </div>
-            <div class="product-buttons">
-                <button type="button" class="button-default cart-btn">Leer Más</button>
-            </div>
-        </div>
-    </div>
-</div>
+    while ($empleado = $resultado->fetch_assoc()) {
+        // Calcular la edad desde la fecha de nacimiento
+        $edad = '';
+        if (!empty($empleado['fecha_nacimiento'])) {
+            $fecha_nac = new DateTime($empleado['fecha_nacimiento']);
+            $hoy = new DateTime();
+            $edad = $hoy->diff($fecha_nac)->y . ' años';
+        }
 
-               
+        // Ruta a la imagen
+        $foto = (!empty($empleado['foto_perfil_ruta']) && file_exists('fotos/' . $empleado['foto_perfil_ruta']))
+            ? 'fotos/' . $empleado['foto_perfil_ruta']
+            : 'img/usuario.png'; // Imagen por defecto si no hay foto
 
+        // Información adicional
+        $experiencia = !empty($empleado['experiencia']) ? htmlspecialchars($empleado['experiencia']) : 'Sin especificar';
+        $puesto = !empty($empleado['puesto_asignado']) ? htmlspecialchars($empleado['puesto_asignado']) : 'Sin asignar';
 
+        echo '
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="courses-inner res-mg-b-30">
+                <div class="courses-title text-center">
+                    <a href="#"><img src="' . $foto . '" alt="Foto de ' . htmlspecialchars($empleado['nombre']) . '" style="height: 200px; object-fit: cover; border-radius: 50%; width: 200px;"></a>
+                    <h2>' . htmlspecialchars($empleado['nombre']) . '</h2>
+                </div>
+                <div class="courses-alaltic text-center">
+                    <span class="cr-ic-r">
+                        <span class="course-icon"><i class="fa fa-user"></i></span> ' . $edad . '
+                    </span>
+                    <span class="cr-ic-r">
+                        <span class="course-icon"><i class="fa fa-map-marker"></i></span> Punto: ' . $puesto . '
+                    </span>
+                </div>
+                <div class="course-des">
+                    <p><span><i class="fa fa-user"></i></span> <b>Experiencia:</b> ' . $experiencia . '</p>
+                    <p><span><i class="fa fa-building"></i></span> <b>Asignado en:</b> Proliseg Ltda</p>
+                </div>
+                <div class="product-buttons text-center">
+                    <button type="button" class="button-default cart-btn">Leer Más</button>
+                </div>
             </div>
-        </div>
+        </div>';
+    }
+
+    echo '</div></div></div>';
+} else {
+    echo "<p class='text-center'>No hay empleados registrados aún.</p>";
+}
+?>
+
        <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">

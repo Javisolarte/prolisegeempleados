@@ -91,7 +91,7 @@ $stmt->bind_param(
 if ($stmt->execute()) {
     $stmt->close();
     $conexion->close();
-    header("Location: todos-empleados.html?registrado=1");
+    header("Location: todos-empleados.php?registrado=1");
     exit;
 } else {
     echo "Error al guardar en la base de datos: " . $stmt->error;
