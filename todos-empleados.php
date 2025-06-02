@@ -255,7 +255,7 @@ if ($resultado && $resultado->num_rows > 0) {
     echo '<div class="courses-area"><div class="container-fluid"><div class="row">';
 
     while ($empleado = $resultado->fetch_assoc()) {
-        // Calcular la edad
+        // Calcular edad
         $edad = '';
         if (!empty($empleado['fecha_nacimiento'])) {
             $fecha_nac = new DateTime($empleado['fecha_nacimiento']);
@@ -263,7 +263,7 @@ if ($resultado && $resultado->num_rows > 0) {
             $edad = $hoy->diff($fecha_nac)->y . ' años';
         }
 
-        // Ruta de la foto
+        // Foto de perfil
         $foto = (!empty($empleado['foto_perfil_ruta']) && file_exists($empleado['foto_perfil_ruta']))
             ? $empleado['foto_perfil_ruta']
             : 'img/usuario.png';
@@ -271,14 +271,14 @@ if ($resultado && $resultado->num_rows > 0) {
         $nombre = htmlspecialchars($empleado['nombre']);
         $experiencia = !empty($empleado['experiencia']) ? htmlspecialchars($empleado['experiencia']) : 'Sin especificar';
 
-        // Preparar valores predeterminados del lugar
+        // Valores por defecto
         $nombre_lugar = 'Sin asignar';
-        $telefono_lugar = 'No disponible';
+        $telefono_lugar = 'N/A';
 
-        // Si el puesto_asignado es un ID válido
+        // Buscar información del lugar asignado
         if (!empty($empleado['puesto_asignado']) && is_numeric($empleado['puesto_asignado'])) {
             $id_lugar = intval($empleado['puesto_asignado']);
-            $consultaLugar = $conexion->prepare("SELECT nombre, telefono FROM lugares_seguridad WHERE id = ?");
+            $consultaLugar = $conexion->prepare("SELECT nombre, telefono FROM lugares_seguridad WHERE id_lugar = ?");
             $consultaLugar->bind_param("i", $id_lugar);
             $consultaLugar->execute();
             $resultadoLugar = $consultaLugar->get_result();
@@ -304,25 +304,13 @@ if ($resultado && $resultado->num_rows > 0) {
                         <span class="course-icon"><i class="fa fa-user"></i></span> ' . $edad . '
                     </span>
                     <span class="cr-ic-r">
-                        <span class="course-icon"><i class="fa fa-phone"></i></span> Punto: ' . $telefono_lugar . '
+                        <span class="course-icon"><i class="fa fa-phone"></i></span> ' . $telefono_lugar . '
                     </span>
                 </div>
                 <div class="course-des">
                     <p><span><i class="fa fa-user"></i></span> <b>Experiencia:</b> ' . $experiencia . '</p>
                     <p><span><i class="fa fa-building"></i></span> <b>Lugar:</b> ' . $nombre_lugar . '</p>
-                </div>
-                <div class="product-buttons text-center">
-                    <button type="button" class="button-default cart-btn">Leer Más</button>
-                </div>
-            </div>
-        </div>';
-    }
-
-    echo '</div></div></div>';
-} else {
-    echo "<p class='text-center'>No hay empleados registrados aún.</p>";
-}
-?>
+                </di
 
 
        <div class="footer-copyright-area">
