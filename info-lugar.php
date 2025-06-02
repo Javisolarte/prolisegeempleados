@@ -341,7 +341,7 @@
                                     <div class="col-lg-12">
                                         <div class="address-hr">
                                             <p><b>Dirección</b><br /> <?php echo $direccion; ?></p>
-                                            <p><b>Registrado el</b><br /> <?php echo $fecha_creacion; ?></p>
+                                            <p><b>Registrado </b><br /> <?php echo $fecha_creacion; ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -356,352 +356,38 @@
                                 <li><a href="#INFORMATION">Actualizar Datos</a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
-                                <div class="product-tab-list tab-pane fade active in" id="description">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="review-content-section">
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                                        <div class="address-hr biography">
-                                                            <p><b>Full Name</b><br /> Fly Zend</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                                        <div class="address-hr biography">
-                                                            <p><b>Mobile</b><br /> 01962067309</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                                        <div class="address-hr biography">
-                                                            <p><b>Email</b><br /> fly@gmail.com</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                                        <div class="address-hr biography">
-                                                            <p><b>Location</b><br /> UK</p>
-                                                        </div>
-                                                    </div>
+                                <!-- Mostrar empleados asignados -->
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="profile-info-inner">
+                                        <h3>Empleados Asignados a este Lugar</h3>
+                                        <hr />
+                                        <?php
+                                        $stmt_empleados = $conexion->prepare("SELECT * FROM empleados WHERE puesto_asignado = ?");
+                                        $stmt_empleados->bind_param("s", $lugar_id);
+                                        $stmt_empleados->execute();
+                                        $empleados_result = $stmt_empleados->get_result();
+
+                                        if ($empleados_result->num_rows === 0) {
+                                            echo "<p>No hay empleados asignados a este lugar.</p>";
+                                        } else {
+                                            while ($empleado = $empleados_result->fetch_assoc()) {
+                                                ?>
+                                                <div class="single-employee"
+                                                    style="margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                                                    <h4><?php echo htmlspecialchars($empleado['nombre']); ?></h4>
+                                                    <p><b>Cédula:</b> <?php echo htmlspecialchars($empleado['cedula']); ?></p>
+                                                    <p><b>Teléfono:</b> <?php echo htmlspecialchars($empleado['celular']); ?>
+                                                    </p>
+                                                    <p><b>Correo:</b> <?php echo htmlspecialchars($empleado['email']); ?></p>
+                                                    <p><b>Cargo:</b> <?php echo htmlspecialchars($empleado['cargo']); ?></p>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="content-profile">
-                                                            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate
-                                                                eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-                                                                venenatis vitae, justo. Nullam dictum felis eu pede
-                                                                mollis pretium. Integer tincidunt.Cras
-                                                                dapibus. Vivamus elementum semper nisi. Aenean vulputate
-                                                                eleifend tellus. Aenean leo ligula, porttitor eu,
-                                                                consequat vitae, eleifend ac, enim.</p>
-                                                            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate
-                                                                eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-                                                                venenatis vitae, justo. Nullam dictum felis eu pede
-                                                                mollis pretium. Integer tincidunt.Cras
-                                                                dapibus. Vivamus elementum semper nisi. Aenean vulputate
-                                                                eleifend tellus. Aenean leo ligula, porttitor eu,
-                                                                consequat vitae, eleifend ac, enim.</p>
-                                                            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate
-                                                                eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-                                                                venenatis vitae, justo. Nullam dictum felis eu pede
-                                                                mollis pretium. Integer tincidunt.Cras
-                                                                dapibus. Vivamus elementum semper nisi. Aenean vulputate
-                                                                eleifend tellus. Aenean leo ligula, porttitor eu,
-                                                                consequat vitae, eleifend ac, enim.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mg-b-15">
-                                                    <div class="col-lg-12">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="skill-title">
-                                                                    <h2>Skill Set</h2>
-                                                                    <hr />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="progress-skill">
-                                                            <h2>Java</h2>
-                                                            <div class="progress progress-mini">
-                                                                <div style="width: 90%;"
-                                                                    class="progress-bar progress-yellow"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="progress-skill">
-                                                            <h2>Php</h2>
-                                                            <div class="progress progress-mini">
-                                                                <div style="width: 80%;"
-                                                                    class="progress-bar progress-green"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="progress-skill">
-                                                            <h2>Apps</h2>
-                                                            <div class="progress progress-mini">
-                                                                <div style="width: 70%;"
-                                                                    class="progress-bar progress-blue"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="progress-skill">
-                                                            <h2>C#</h2>
-                                                            <div class="progress progress-mini">
-                                                                <div style="width: 60%;"
-                                                                    class="progress-bar progress-red"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mg-b-15">
-                                                    <div class="col-lg-12">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="skill-title">
-                                                                    <h2>Education</h2>
-                                                                    <hr />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="ex-pro">
-                                                            <ul>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mg-b-15">
-                                                    <div class="col-lg-12">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="skill-title">
-                                                                    <h2>Experience</h2>
-                                                                    <hr />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="ex-pro">
-                                                            <ul>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="skill-title">
-                                                                    <h2>Subjects</h2>
-                                                                    <hr />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="ex-pro">
-                                                            <ul>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
                                     </div>
                                 </div>
-                                <div class="product-tab-list tab-pane fade" id="reviews">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="review-content-section">
-                                                <div class="chat-discussion" style="height: auto">
-                                                    <div class="chat-message">
-                                                        <div class="profile-hdtc">
-                                                            <img class="message-avatar" src="img/contact/1.jpg" alt="">
-                                                        </div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Michael Smith </a>
-                                                            <span class="message-date"> Mon Jan 26 2015 - 18:39:23
-                                                            </span>
-                                                            <span class="message-content">Lorem ipsum dolor sit amet,
-                                                                consectetuer adipiscing elit, sed diam nonummy nibh
-                                                                euismod tincidunt ut laoreet dolore magna aliquam erat
-                                                                volutpat.
-                                                            </span>
-                                                            <div class="m-t-md mg-t-10">
-                                                                <a class="btn btn-xs btn-default"><i
-                                                                        class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a class="btn btn-xs btn-success"><i
-                                                                        class="fa fa-heart"></i> Love</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-                                                        <div class="profile-hdtc">
-                                                            <img class="message-avatar" src="img/contact/2.jpg" alt="">
-                                                        </div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Karl Jordan </a>
-                                                            <span class="message-date"> Fri Jan 25 2015 - 11:12:36
-                                                            </span>
-                                                            <span class="message-content">
-                                                                Many desktop publishing packages and web page editors
-                                                                now use Lorem Ipsum as their default model text, and a
-                                                                search for 'lorem ipsum' will uncover.
-                                                            </span>
-                                                            <div class="m-t-md mg-t-10">
-                                                                <a class="btn btn-xs btn-default"><i
-                                                                        class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a class="btn btn-xs btn-default"><i
-                                                                        class="fa fa-heart"></i> Love</a>
-                                                                <a class="btn btn-xs btn-primary"><i
-                                                                        class="fa fa-pencil"></i> Message</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-                                                        <div class="profile-hdtc">
-                                                            <img class="message-avatar" src="img/contact/3.jpg" alt="">
-                                                        </div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Michael Smith </a>
-                                                            <span class="message-date"> Fri Jan 25 2015 - 11:12:36
-                                                            </span>
-                                                            <span class="message-content">
-                                                                There are many variations of passages of Lorem Ipsum
-                                                                available, but the majority have suffered alteration.
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-                                                        <div class="profile-hdtc">
-                                                            <img class="message-avatar" src="img/contact/4.jpg" alt="">
-                                                        </div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Alice Jordan </a>
-                                                            <span class="message-date"> Fri Jan 25 2015 - 11:12:36
-                                                            </span>
-                                                            <span class="message-content">
-                                                                All the Lorem Ipsum generators on the Internet tend to
-                                                                repeat predefined chunks as necessary, making this the
-                                                                first true generator on the Internet.
-                                                                It uses a dictionary of over 200 Latin words.
-                                                            </span>
-                                                            <div class="m-t-md mg-t-10">
-                                                                <a class="btn btn-xs btn-default"><i
-                                                                        class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a class="btn btn-xs btn-warning"><i
-                                                                        class="fa fa-eye"></i> Nudge</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-                                                        <div class="profile-hdtc">
-                                                            <img class="message-avatar" src="img/contact/1.jpg" alt="">
-                                                        </div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Mark Smith </a>
-                                                            <span class="message-date"> Fri Jan 25 2015 - 11:12:36
-                                                            </span>
-                                                            <span class="message-content">
-                                                                All the Lorem Ipsum generators on the Internet tend to
-                                                                repeat predefined chunks as necessary, making this the
-                                                                first true generator on the Internet.
-                                                                It uses a dictionary of over 200 Latin words.
-                                                            </span>
-                                                            <div class="m-t-md mg-t-10">
-                                                                <a class="btn btn-xs btn-default"><i
-                                                                        class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a class="btn btn-xs btn-success"><i
-                                                                        class="fa fa-heart"></i> Love</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-                                                        <div class="profile-hdtc">
-                                                            <img class="message-avatar" src="img/contact/2.jpg" alt="">
-                                                        </div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Karl Jordan </a>
-                                                            <span class="message-date"> Fri Jan 25 2015 - 11:12:36
-                                                            </span>
-                                                            <span class="message-content">
-                                                                Many desktop publishing packages and web page editors
-                                                                now use Lorem Ipsum as their default model text, and a
-                                                                search for 'lorem ipsum' will uncover.
-                                                            </span>
-                                                            <div class="m-t-md mg-t-10">
-                                                                <a class="btn btn-xs btn-default"><i
-                                                                        class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a class="btn btn-xs btn-default"><i
-                                                                        class="fa fa-heart"></i> Love</a>
-                                                                <a class="btn btn-xs btn-primary"><i
-                                                                        class="fa fa-pencil"></i> Message</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-                                                        <div class="profile-hdtc">
-                                                            <img class="message-avatar" src="img/contact/3.jpg" alt="">
-                                                        </div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Michael Smith </a>
-                                                            <span class="message-date"> Fri Jan 25 2015 - 11:12:36
-                                                            </span>
-                                                            <span class="message-content">
-                                                                There are many variations of passages of Lorem Ipsum
-                                                                available, but the majority have suffered alteration.
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-                                                        <div class="profile-hdtc">
-                                                            <img class="message-avatar" src="img/contact/4.jpg" alt="">
-                                                        </div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Alice Jordan </a>
-                                                            <span class="message-date"> Fri Jan 25 2015 - 11:12:36
-                                                            </span>
-                                                            <span class="message-content">
-                                                                All the Lorem Ipsum generators on the Internet tend to
-                                                                repeat predefined chunks as necessary, making this the
-                                                                first true generator on the Internet.
-                                                                It uses a dictionary of over 200 Latin words.
-                                                            </span>
-                                                            <div class="m-t-md mg-t-10">
-                                                                <a class="btn btn-xs btn-default"><i
-                                                                        class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a class="btn btn-xs btn-default"><i
-                                                                        class="fa fa-heart"></i> Love</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="product-tab-list tab-pane fade" id="INFORMATION">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
