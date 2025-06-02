@@ -40,9 +40,9 @@ $estado_civil = $_POST['estado_civil'] ?? null;
 $formacion = $_POST['formacion'] ?? null;
 $experiencia = $_POST['experiencia'] ?? null;
 $puesto_asignado = $_POST['puesto_asignado'] ?? null;
-$cargo = $_POST['cargo'] ?? null; // Nuevo campo
+$cargo = $_POST['cargo'] ?? null;
 $tipo_contrato = $_POST['tipo_contrato'] ?? 'Indefinido';
-$sueldo = floatval($_POST['sueldo'] ?? 0);
+$sueldo = trim($_POST['sueldo'] ?? ''); // AHORA ES STRING
 $fecha_ingreso = $_POST['fecha_ingreso'] ?? null;
 $estado = $_POST['estado'] ?? 'Activo';
 $observaciones = $_POST['observaciones'] ?? null;
@@ -74,7 +74,7 @@ if (isset($_FILES['foto_perfil_ruta']) && $_FILES['foto_perfil_ruta']['error'] =
     }
 }
 
-// 4. INSERTAR EN BASE DE DATOS (con el campo nuevo `cargo`)
+// 4. INSERTAR EN BASE DE DATOS (sueldo tipo string ahora)
 $sql = "INSERT INTO empleados (
     nombre, cedula, direccion, celular, email, fecha_nacimiento, genero, estado_civil,
     formacion, experiencia, puesto_asignado, cargo, tipo_contrato, sueldo, fecha_ingreso,
@@ -83,7 +83,7 @@ $sql = "INSERT INTO empleados (
 
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param(
-    "sssssssssssssdssssss",
+    "sssssssssssssssssss",
     $nombre, $cedula, $direccion, $celular, $email, $fecha_nacimiento, $genero, $estado_civil,
     $formacion, $experiencia, $puesto_asignado, $cargo, $tipo_contrato, $sueldo, $fecha_ingreso,
     $hoja_vida_ruta, $foto_perfil_ruta, $estado, $observaciones
