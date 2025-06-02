@@ -100,8 +100,7 @@
                                 <li><a title="Agregar empleado" href="agregar-empleado.php"><span
                                             class="mini-sub-pro">Agregar empleado</span></a></li>
 
-                                <li><a title="Perfil del empleado" href="perfil-empleado.php"><span
-                                            class="mini-sub-pro">Perfil del empleado</span></a></li>
+                                
                             </ul>
                         </li>
                         <li>
@@ -114,8 +113,7 @@
                                             class="mini-sub-pro">Todos los lugares</span></a></li>
                                 <li><a title="Agregar lugar" href="agregar-lugar.php"><span
                                             class="mini-sub-pro">Agregar lugar</span></a></li>
-                                <li><a title="Información del lugar" href="info-lugar.php"><span
-                                            class="mini-sub-pro">Información del lugar</span></a></li>
+                                
                             </ul>
                         </li>
                     </ul>
