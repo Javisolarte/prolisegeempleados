@@ -377,10 +377,9 @@
                                     $resultEmp = $stmtEmp->get_result();
 
                                     while ($empleado = $resultEmp->fetch_assoc()) {
-                                        // Aquí insertamos el HTML por cada empleado
+                                        $hoja_vida_ruta = $empleado['hoja_vida_ruta'];
                                         ?>
                                         <div class="product-tab-list tab-pane fade active in" id="description">
-                                            
                                             <div class="row">
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                     <div class="review-content-section">
@@ -392,18 +391,12 @@
                                                                     <p><b>Nombre</b><br /> <?php echo $empleado['nombre']; ?>
                                                                     </p>
                                                                 </div>
-                                                                <div class="address-hr biography">
-                                                                    <p><b>Cedula</b><br /> <?php echo $empleado['cedula']; ?>
-                                                                    </p>
-                                                                </div>
                                                             </div>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                                 <div class="address-hr biography">
-                                                                    <p><b>Telefono</b><br /> <?php echo $empleado['celular']; ?>
+                                                                    <p><b>Teléfono</b><br /> <?php echo $empleado['celular']; ?>
                                                                     </p>
-                                                                </div>
-                                                                <div class="address-hr biography">
-                                                                    <p><b>Cedula</b><br /> <?php echo $empleado['cedula']; ?>
+                                                                    <p><b>Cédula</b><br /> <?php echo $empleado['cedula']; ?>
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -414,11 +407,13 @@
                                                             </div>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                                 <div class="address-hr biography">
-                                                                    <p><b>Direccion</b><br />
+                                                                    <p><b>Dirección</b><br />
                                                                         <?php echo $empleado['direccion']; ?></p>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <!-- Botón Ver más -->
                                                         <div class="product-buttons text-center">
                                                             <a
                                                                 href="perfil-empleado.php?cedula=<?php echo $empleado['cedula']; ?>">
@@ -427,6 +422,15 @@
                                                             </a>
                                                         </div>
 
+                                                        <!-- Botón Descargar Hoja de Vida -->
+                                                        <?php if (!empty($hoja_vida_ruta)): ?>
+                                                            <div class="text-center" style="margin-top: 10px;">
+                                                                <a href="<?php echo htmlspecialchars($hoja_vida_ruta); ?>"
+                                                                    class="btn btn-primary" download>
+                                                                    <i class="fa fa-download"></i> Descargar Hoja de Vida
+                                                                </a>
+                                                            </div>
+                                                        <?php endif; ?>
 
                                                     </div>
                                                 </div>
@@ -438,6 +442,7 @@
                                     echo "<p>No se encontró el lugar con ese nombre.</p>";
                                 }
                                 ?>
+
 
 
                                 <div class="product-tab-list tab-pane fade" id="INFORMATION">
@@ -558,11 +563,11 @@
         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">
-                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="footer-copy-right">
-                                <p>Copyright © 2025. <a href="https://proliseg.com">PROLISEG LTDA</a></p>
-                            </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="footer-copy-right">
+                            <p>Copyright © 2025. <a href="https://proliseg.com">PROLISEG LTDA</a></p>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
