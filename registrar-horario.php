@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("sss", $mes, $rutaDestino, $fecha_subida);
 
             if ($stmt->execute()) {
-                echo "<script>alert('Horario subido correctamente'); window.location.href='nombre-pagina-retorno.php';</script>";
+                echo "<script>alert('Horario subido correctamente'); window.location.href='horario-viewer.php';</script>";
             } else {
                 echo "Error al guardar en la base de datos: " . $stmt->error;
             }
