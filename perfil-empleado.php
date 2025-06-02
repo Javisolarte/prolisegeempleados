@@ -318,7 +318,7 @@
                             $id_lugar = $empleado['puesto_asignado'];
 
                             $sql = "SELECT nombre FROM lugares_seguridad WHERE id_lugar = ?";
-                            $stmt = $conn->prepare($sql);
+                            $stmt = $conexion->prepare($sql);
                             $stmt->bind_param("i", $id_lugar);
                             $stmt->execute();
                             $result = $stmt->get_result();
