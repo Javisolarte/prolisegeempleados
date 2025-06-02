@@ -13,6 +13,6 @@ if (isset($_COOKIE[session_name()])) {
 session_destroy();
 
 // Redirigir al formulario de inicio de sesión o a otra página
-header("Location: login.html");
+header("Location: index.html");
 exit();
 ?>

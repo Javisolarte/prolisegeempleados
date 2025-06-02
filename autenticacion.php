@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Credenciales incorrectas
         echo "<h1>Error</h1>";
         echo "<p>La cédula <b>" . htmlspecialchars($cedula) . "</b> no existe o la contraseña es incorrecta.</p>";
-        echo "<p><a href='login.html'>Volver al inicio de sesión</a></p>";
+        echo "<p><a href='index.html'>Volver al inicio de sesión</a></p>";
     }
 
     // Cerrar conexión
