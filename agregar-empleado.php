@@ -268,7 +268,7 @@
                                         <div id="dropzone1" class="pro-ad">
                                           <?php
 // Conexión a base de datos
-include("conexion.php");
+include("db_config.php");
 $lugares = mysqli_query($conexion, "SELECT id, nombre FROM lugares");
 ?>
 
