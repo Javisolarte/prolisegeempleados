@@ -247,15 +247,26 @@
                <?php
 include('db_config.php');
 
-// Consulta todos los empleados
-$sql = "SELECT nombre, fecha_nacimiento, foto_perfil_ruta, experiencia, puesto_asignado FROM empleados";
+// Consulta todos los empleados junto con su lugar asignado
+$sql = "SELECT 
+            e.nombre, 
+            e.cedula, 
+            e.fecha_nacimiento, 
+            e.foto_perfil_ruta, 
+            e.experiencia, 
+            e.puesto_asignado,
+            l.nombre AS lugar_nombre,
+            l.telefono AS lugar_telefono
+        FROM empleados e
+        LEFT JOIN lugares_seguridad l ON e.puesto_asignado = l.id_lugar";
+
 $resultado = $conexion->query($sql);
 
 if ($resultado && $resultado->num_rows > 0) {
     echo '<div class="courses-area"><div class="container-fluid"><div class="row">';
 
     while ($empleado = $resultado->fetch_assoc()) {
-        // Calcular edad
+        // Calcular la edad desde la fecha de nacimiento
         $edad = '';
         if (!empty($empleado['fecha_nacimiento'])) {
             $fecha_nac = new DateTime($empleado['fecha_nacimiento']);
@@ -263,34 +274,17 @@ if ($resultado && $resultado->num_rows > 0) {
             $edad = $hoy->diff($fecha_nac)->y . ' años';
         }
 
-        // Foto de perfil
+        // Ruta de imagen
         $foto = (!empty($empleado['foto_perfil_ruta']) && file_exists($empleado['foto_perfil_ruta']))
             ? $empleado['foto_perfil_ruta']
-            : 'img/usuario.png';
+            : 'img/usuario.png'; // Imagen por defecto
 
+        // Datos del empleado y lugar
         $nombre = htmlspecialchars($empleado['nombre']);
+        $cedula = urlencode($empleado['cedula']);
         $experiencia = !empty($empleado['experiencia']) ? htmlspecialchars($empleado['experiencia']) : 'Sin especificar';
-
-        // Valores por defecto
-        $nombre_lugar = 'Sin asignar';
-        $telefono_lugar = 'N/A';
-
-        // Buscar información del lugar asignado
-        if (!empty($empleado['puesto_asignado']) && is_numeric($empleado['puesto_asignado'])) {
-            $id_lugar = intval($empleado['puesto_asignado']);
-            $consultaLugar = $conexion->prepare("SELECT nombre, telefono FROM lugares_seguridad WHERE id_lugar = ?");
-            $consultaLugar->bind_param("i", $id_lugar);
-            $consultaLugar->execute();
-            $resultadoLugar = $consultaLugar->get_result();
-
-            if ($resultadoLugar && $resultadoLugar->num_rows > 0) {
-                $lugar = $resultadoLugar->fetch_assoc();
-                $nombre_lugar = htmlspecialchars($lugar['nombre']);
-                $telefono_lugar = htmlspecialchars($lugar['telefono']);
-            }
-
-            $consultaLugar->close();
-        }
+        $lugar = !empty($empleado['lugar_nombre']) ? htmlspecialchars($empleado['lugar_nombre']) : 'No asignado';
+        $telefono = !empty($empleado['lugar_telefono']) ? htmlspecialchars($empleado['lugar_telefono']) : 'Sin teléfono';
 
         echo '
         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
@@ -304,15 +298,15 @@ if ($resultado && $resultado->num_rows > 0) {
                         <span class="course-icon"><i class="fa fa-user"></i></span> ' . $edad . '
                     </span>
                     <span class="cr-ic-r">
-                        <span class="course-icon"><i class="fa fa-phone"></i></span> ' . $telefono_lugar . '
+                        <span class="course-icon"><i class="fa fa-phone"></i></span> ' . $telefono . '
                     </span>
                 </div>
                 <div class="course-des">
                     <p><span><i class="fa fa-user"></i></span> <b>Experiencia:</b> ' . $experiencia . '</p>
-                    <p><span><i class="fa fa-building"></i></span> <b>Lugar:</b> ' . $nombre_lugar . '</p>
+                    <p><span><i class="fa fa-building"></i></span> <b>Lugar:</b> ' . $lugar . '</p>
                 </div>
                 <div class="product-buttons text-center">
-                    <button type="button" class="button-default cart-btn">Leer Más</button>
+                    <a href="perfil-empleado.php?cedula=' . $cedula . '" class="button-default cart-btn">Leer Más</a>
                 </div>
             </div>
         </div>';
