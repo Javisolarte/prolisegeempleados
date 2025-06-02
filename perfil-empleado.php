@@ -505,14 +505,7 @@
                                                                 <?php echo htmlspecialchars($estado); ?></p>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-                                                        <?php if (!empty($hoja_vida)): ?>
-                                                            <a href="<?php echo htmlspecialchars($hoja_vida); ?>"
-                                                                class="btn btn-primary" download>
-                                                                <i class="fa fa-download"></i> Descargar Hoja de Vida
-                                                            </a>
-                                                        <?php endif; ?>
-                                                    </div>
+                                                   
                                                 </div>
                                                 <br><br><br>
                                                 <!-- Formación -->
@@ -539,6 +532,14 @@
                                                     </div>
                                                 </div>
 
+                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
+                                                        <?php if (!empty($hoja_vida)): ?>
+                                                            <a href="<?php echo htmlspecialchars($hoja_vida); ?>"
+                                                                class="btn btn-primary" download>
+                                                                <i class="fa fa-download"></i> Descargar Hoja de Vida
+                                                            </a>
+                                                        <?php endif; ?>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
