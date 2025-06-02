@@ -386,7 +386,6 @@
                         <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                             <ul id="myTabedu1" class="tab-review-design">
                                 <li class="active"><a href="#description">Informacion Personal</a></li>
-                                <li><a href="#INFORMATION">Actualizar Datos</a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
 
