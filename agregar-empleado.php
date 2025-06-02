@@ -97,7 +97,7 @@
                         </a>
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="Todos los empleados" href="todos-empleados.php"><span class="mini-sub-pro">Todos los empleados</span></a></li>
-                            <li><a title="Agregar empleado" href="agregar-empleado.html"><span class="mini-sub-pro">Agregar empleado</span></a></li>
+                            <li><a title="Agregar empleado" href="agregar-empleado.php"><span class="mini-sub-pro">Agregar empleado</span></a></li>
                            
                             <li><a title="Perfil del empleado" href="perfil-empleado.html"><span class="mini-sub-pro">Perfil del empleado</span></a></li>
                         </ul>
@@ -196,7 +196,7 @@
                                 </a>
                                 <ul id="menuEmpleados" class="collapse dropdown-header-top">
                                     <li><a href="todos-empleados.php">Todos los empleados</a></li>
-                                    <li><a href="agregar-empleado.html">Agregar empleado</a></li>
+                                    <li><a href="agregar-empleado.php">Agregar empleado</a></li>
                                     
                                     <li><a href="perfil-empleado.html">Perfil del empleado</a></li>
                                 </ul>
@@ -266,14 +266,19 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="review-content-section">
                                         <div id="dropzone1" class="pro-ad">
-                                          <form action="registrar_empleado.php" method="POST" enctype="multipart/form-data" id="form-empleado">
+                                          <?php
+// Conexión a base de datos
+include("conexion.php");
+$lugares = mysqli_query($conexion, "SELECT id, nombre FROM lugares");
+?>
+
+<form action="registrar_empleado.php" method="POST" enctype="multipart/form-data" id="form-empleado">
     <div class="row">
         <!-- Columna izquierda -->
         <div class="col-lg-6">
-            <!-- Foto de Perfil -->
             <div class="form-group">
                 <label>Foto de Perfil (JPG o PNG)</label>
-                <input type="file" name="foto_perfil_ruta" accept="image/jpeg,image/png" class="form-control" >
+                <input type="file" name="foto_perfil_ruta" accept="image/jpeg,image/png" class="form-control">
             </div>
 
             <div class="form-group">
@@ -309,7 +314,7 @@
             <div class="form-group">
                 <label>Género</label>
                 <select name="genero" class="form-control">
-                    <option value="" selected disabled>Seleccionar género</option>
+                    <option value="" disabled selected>Seleccionar género</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>
                     <option value="Otro">Otro</option>
@@ -319,7 +324,7 @@
             <div class="form-group">
                 <label>Estado Civil</label>
                 <select name="estado_civil" class="form-control">
-                    <option value="" selected disabled>Seleccionar estado civil</option>
+                    <option value="" disabled selected>Seleccionar estado civil</option>
                     <option value="Soltero">Soltero</option>
                     <option value="Casado">Casado</option>
                     <option value="Divorciado">Divorciado</option>
@@ -335,7 +340,6 @@
 
         <!-- Columna derecha -->
         <div class="col-lg-6">
-            <!-- Hoja de Vida PDF -->
             <div class="form-group">
                 <label>Hoja de Vida (PDF)</label>
                 <input type="file" name="hoja_vida_ruta" accept="application/pdf" class="form-control" required>
@@ -343,34 +347,54 @@
 
             <div class="form-group">
                 <label>Formación Académica</label>
-                <textarea name="formacion" class="form-control" placeholder="Formación académica o títulos obtenidos"></textarea>
+                <select name="formacion" class="form-control">
+                    <option value="" disabled selected>Seleccionar formación</option>
+                    <option value="Bachiller">Bachiller</option>
+                    <option value="Técnica">Técnica</option>
+                    <option value="Tecnóloga">Tecnóloga</option>
+                    <option value="Profesional">Profesional</option>
+                </select>
             </div>
 
             <div class="form-group">
                 <label>Experiencia Laboral</label>
-                <textarea name="experiencia" class="form-control" placeholder="Experiencia laboral previa"></textarea>
+                <select name="experiencia" class="form-control">
+                    <option value="" disabled selected>Seleccionar experiencia</option>
+                    <?php for ($i = 1; $i <= 10; $i++): ?>
+                        <option value="<?= $i ?> año<?= $i > 1 ? 's' : '' ?>"><?= $i ?> año<?= $i > 1 ? 's' : '' ?></option>
+                    <?php endfor; ?>
+                </select>
             </div>
 
             <div class="form-group">
                 <label>Puesto Asignado</label>
-                <input name="puesto_asignado" type="text" class="form-control" placeholder="Nombre del puesto o cargo">
+                <select name="puesto_asignado" class="form-control">
+                    <option value="" disabled selected>Seleccionar lugar</option>
+                    <?php while($lugar = mysqli_fetch_assoc($lugares)): ?>
+                        <option value="<?= $lugar['nombre'] ?>"><?= $lugar['nombre'] ?></option>
+                    <?php endwhile; ?>
+                </select>
             </div>
 
             <div class="form-group">
-                <label>Tipo de Contrato</label>
-                <select name="tipo_contrato" class="form-control">
-                    <option value="" selected disabled>Seleccionar tipo de contrato</option>
-                    <option value="Indefinido">Indefinido</option>
-                    <option value="Temporal">Temporal</option>
-                    <option value="Practicante">Practicante</option>
-                    <option value="Freelance">Freelance</option>
-                    <option value="Otro">Otro</option>
+                <label>Cargo</label>
+                <select name="cargo" class="form-control">
+                    <option value="" disabled selected>Seleccionar cargo</option>
+                    <option value="Guarda de seguridad">Guarda de seguridad</option>
+                    <option value="Supervisor">Supervisor</option>
+                    <option value="Ingeniero">Ingeniero</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label>Sueldo</label>
-                <input name="sueldo" type="number" step="0.01" class="form-control" placeholder="Ejemplo: 1500.00">
+                <select name="sueldo" class="form-control">
+                    <option value="" disabled selected>Seleccionar tipo de sueldo</option>
+                    <option value="Salario básico">Salario básico</option>
+                    <option value="Salario básico + horas extras">Salario básico + horas extras</option>
+                    <option value="Salario profesional">Salario profesional</option>
+                    <option value="Salario supervisor">Salario supervisor</option>
+                </select>
             </div>
 
             <div class="form-group">
@@ -381,7 +405,7 @@
             <div class="form-group">
                 <label>Estado del Empleado</label>
                 <select name="estado" class="form-control">
-                    <option value="" selected disabled>Seleccionar estado</option>
+                    <option value="" disabled selected>Seleccionar estado</option>
                     <option value="Activo">Activo</option>
                     <option value="Inactivo">Inactivo</option>
                 </select>
@@ -390,7 +414,7 @@
     </div>
 
     <div class="text-center mt-3">
-        <button type="submit" class="btn btn-primary" id="submitBtn">Guardar Empleado</button>
+        <button type="submit" class="btn btn-primary">Guardar Empleado</button>
     </div>
 </form>
 
