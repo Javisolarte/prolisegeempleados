@@ -291,10 +291,26 @@
         <?php
 include 'db_config.php';
 
-// Obtener mes actual (ej: Junio)
-$mes_actual = ucfirst(strftime("%B", time())); // Si tu servidor está en español, o usa date("F") en inglés
+// Obtener el mes actual en español
+$meses = [
+    'January' => 'Enero',
+    'February' => 'Febrero',
+    'March' => 'Marzo',
+    'April' => 'Abril',
+    'May' => 'Mayo',
+    'June' => 'Junio',
+    'July' => 'Julio',
+    'August' => 'Agosto',
+    'September' => 'Septiembre',
+    'October' => 'Octubre',
+    'November' => 'Noviembre',
+    'December' => 'Diciembre'
+];
 
-// Consulta a la base de datos para buscar el archivo del mes actual
+$mes_actual_en = date("F");
+$mes_actual = $meses[$mes_actual_en]; // Traducción
+
+// Buscar en la base de datos el horario de este mes
 $stmt = $conexion->prepare("SELECT ruta_horario FROM horarios WHERE mes = ? ORDER BY fecha_subida DESC LIMIT 1");
 $stmt->bind_param("s", $mes_actual);
 $stmt->execute();
