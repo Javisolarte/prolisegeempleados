@@ -31,23 +31,24 @@ $stmtCheck->close();
 
 // 2. RECOGER LOS DEMÁS DATOS
 $nombre = strtoupper(trim($_POST['nombre'] ?? ''));
-$direccion = $_POST['direccion'] ?? '';
-$celular = $_POST['celular'] ?? '';
-$email = $_POST['email'] ?? '';
-$fecha_nacimiento = $_POST['fecha_nacimiento'] ?? '';
-$genero = $_POST['genero'] ?? '';
-$estado_civil = $_POST['estado_civil'] ?? '';
-$formacion = $_POST['formacion'] ?? '';
-$experiencia = $_POST['experiencia'] ?? '';
-$puesto_asignado = $_POST['puesto_asignado'] ?? '';
-$tipo_contrato = $_POST['tipo_contrato'] ?? '';
+$direccion = $_POST['direccion'] ?? null;
+$celular = $_POST['celular'] ?? null;
+$email = $_POST['email'] ?? null;
+$fecha_nacimiento = $_POST['fecha_nacimiento'] ?? null;
+$genero = $_POST['genero'] ?? null;
+$estado_civil = $_POST['estado_civil'] ?? null;
+$formacion = $_POST['formacion'] ?? null;
+$experiencia = $_POST['experiencia'] ?? null;
+$puesto_asignado = $_POST['puesto_asignado'] ?? null;
+$cargo = $_POST['cargo'] ?? null; // Nuevo campo
+$tipo_contrato = $_POST['tipo_contrato'] ?? 'Indefinido';
 $sueldo = floatval($_POST['sueldo'] ?? 0);
-$fecha_ingreso = $_POST['fecha_ingreso'] ?? '';
-$estado = $_POST['estado'] ?? '';
-$observaciones = $_POST['observaciones'] ?? '';
+$fecha_ingreso = $_POST['fecha_ingreso'] ?? null;
+$estado = $_POST['estado'] ?? 'Activo';
+$observaciones = $_POST['observaciones'] ?? null;
 
 // 3. PROCESAR ARCHIVOS
-$hoja_vida_ruta = NULL;
+$hoja_vida_ruta = null;
 if (isset($_FILES['hoja_vida_ruta']) && $_FILES['hoja_vida_ruta']['error'] == 0) {
     $ext = pathinfo($_FILES['hoja_vida_ruta']['name'], PATHINFO_EXTENSION);
     $nombre_archivo_cv = "cv_" . $cedula . "." . $ext;
@@ -60,7 +61,7 @@ if (isset($_FILES['hoja_vida_ruta']) && $_FILES['hoja_vida_ruta']['error'] == 0)
     }
 }
 
-$foto_perfil_ruta = NULL;
+$foto_perfil_ruta = null;
 if (isset($_FILES['foto_perfil_ruta']) && $_FILES['foto_perfil_ruta']['error'] == 0) {
     $ext = pathinfo($_FILES['foto_perfil_ruta']['name'], PATHINFO_EXTENSION);
     $nombre_archivo_foto = "foto_" . $cedula . "." . $ext;
@@ -73,18 +74,18 @@ if (isset($_FILES['foto_perfil_ruta']) && $_FILES['foto_perfil_ruta']['error'] =
     }
 }
 
-// 4. INSERTAR
+// 4. INSERTAR EN BASE DE DATOS (con el campo nuevo `cargo`)
 $sql = "INSERT INTO empleados (
     nombre, cedula, direccion, celular, email, fecha_nacimiento, genero, estado_civil,
-    formacion, experiencia, puesto_asignado, tipo_contrato, sueldo, fecha_ingreso,
+    formacion, experiencia, puesto_asignado, cargo, tipo_contrato, sueldo, fecha_ingreso,
     hoja_vida_ruta, foto_perfil_ruta, estado, observaciones
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param(
-    "ssssssssssssdsssss",
+    "sssssssssssssdssssss",
     $nombre, $cedula, $direccion, $celular, $email, $fecha_nacimiento, $genero, $estado_civil,
-    $formacion, $experiencia, $puesto_asignado, $tipo_contrato, $sueldo, $fecha_ingreso,
+    $formacion, $experiencia, $puesto_asignado, $cargo, $tipo_contrato, $sueldo, $fecha_ingreso,
     $hoja_vida_ruta, $foto_perfil_ruta, $estado, $observaciones
 );
 
