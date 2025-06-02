@@ -84,8 +84,9 @@ if ($stmt->execute()) {
             window.location.href = 'todos-empleados.html';
         }
     </script>";
+    exit; // Importante: evita que el script siga y se repita la inserción
 } else {
-    if ($stmt->errno == 1062) { // Error de clave duplicada (UNIQUE)
+    if ($stmt->errno == 1062) { // Error de clave duplicada
         echo "Error: Ya existe un empleado con la cédula '$cedula'.";
     } else {
         echo "Error al guardar en la base de datos: " . $stmt->error;
