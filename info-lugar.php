@@ -415,11 +415,13 @@
                                                             </div>
                                                         </div>
                                                         <div class="product-buttons text-center">
-                                                            <a href="perfil-empleado.php?cedula=' . $cedula . '">
-                                                                <button type="button" class="button-default cart-btn">Ver
-                                                                    mas de este empleado</button>
+                                                            <a
+                                                                href="perfil-empleado.php?cedula=<?php echo $empleado['cedula']; ?>">
+                                                                <button type="button" class="button-default cart-btn">Ver más de
+                                                                    este empleado</button>
                                                             </a>
                                                         </div>
+
 
                                                     </div>
                                                 </div>
