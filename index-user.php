@@ -1,3 +1,4 @@
+<?php include 'proteger.php'; ?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -222,7 +223,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
-                                            <li><a href="index-user.html">Inicio</a> <span class="bread-slash">/</span>
+                                            <li><a href="index-user.php">Inicio</a> <span class="bread-slash">/</span>
                                             </li>
                                             <li><span class="bread-blod">Dashboard V.1</span>
                                             </li>

@@ -1,3 +1,5 @@
+<?php include 'proteger.php'; ?>
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -78,14 +80,14 @@
      <div class="left-sidebar-pro">
     <nav id="sidebar" class="">
         <div class="sidebar-header">
-            <a href="index.html"><img class="main-logo" src="img/logo/logosn.png" style="height: 100px;" alt="" /></a> <br><br>
-            <strong><a href="index.html"><img src="img/logo/logosn.png" alt="" /></a></strong>
+            <a href="index.php"><img class="main-logo" src="img/logo/logosn.png" style="height: 100px;" alt="" /></a> <br><br>
+            <strong><a href="index.php"><img src="img/logo/logosn.png" alt="" /></a></strong>
         </div>
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
                     <li>
-                        <a title="Inicio" href="index.html" aria-expanded="false">
+                        <a title="Inicio" href="index.php" aria-expanded="false">
                             <span class="educate-icon educate-home icon-wrap" aria-hidden="true"></span> 
                             <span class="mini-click-non">Inicio</span>
                         </a>
@@ -109,7 +111,7 @@
                         </a>
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="Todos los lugares" href="todos-lugares.php"><span class="mini-sub-pro">Todos los lugares</span></a></li>
-                            <li><a title="Agregar lugar" href="agregar-lugar.html"><span class="mini-sub-pro">Agregar lugar</span></a></li>
+                            <li><a title="Agregar lugar" href="agregar-lugar.php"><span class="mini-sub-pro">Agregar lugar</span></a></li>
                             <li><a title="Información del lugar" href="info-lugar.html"><span class="mini-sub-pro">Información del lugar</span></a></li>
                         </ul>
                     </li>
@@ -126,7 +128,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" style="height: 30px;" alt="" /></a>
+                        <a href="index.php"><img class="main-logo" src="img/logo/logo.png" style="height: 30px;" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -188,7 +190,7 @@
                     <nav id="dropdown">
                         <ul class="mobile-menu-nav">
                             <li>
-                                <a href="index.html">Inicio</a>
+                                <a href="index.php">Inicio</a>
                             </li>
                             <li>
                                 <a data-toggle="collapse" data-target="#menuEmpleados" href="#">Empleados 
@@ -207,7 +209,7 @@
                                 </a>
                                 <ul id="menuLugares" class="collapse dropdown-header-top">
                                     <li><a href="todos-lugares.php">Todos los lugares</a></li>
-                                    <li><a href="agregar-lugar.html">Agregar lugar</a></li>
+                                    <li><a href="agregar-lugar.php">Agregar lugar</a></li>
                                     <li><a href="info-lugar.html">Información del lugar</a></li>
                                 </ul>
                             </li>
@@ -236,7 +238,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
-                                            <li><a href="index.html">Inicio</a> <span class="bread-slash">/</span>
+                                            <li><a href="index.php">Inicio</a> <span class="bread-slash">/</span>
                                             </li>
                                             <li><span class="bread-blod">Adicionar empleado</span>
                                             </li>

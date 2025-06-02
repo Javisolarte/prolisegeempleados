@@ -1,3 +1,5 @@
+<?php include 'proteger.php'; ?>
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -103,7 +105,7 @@
                         </a>
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="Todos los lugares" href="todos-lugares.php"><span class="mini-sub-pro">Todos los lugares</span></a></li>
-                            <li><a title="Agregar lugar" href="agregar-lugar.html"><span class="mini-sub-pro">Agregar lugar</span></a></li>
+                            <li><a title="Agregar lugar" href="agregar-lugar.php"><span class="mini-sub-pro">Agregar lugar</span></a></li>
                             <li><a title="Información del lugar" href="info-lugar.html"><span class="mini-sub-pro">Información del lugar</span></a></li>
                         </ul>
                     </li>
@@ -201,7 +203,7 @@
                                 </a>
                                 <ul id="menuLugares" class="collapse dropdown-header-top">
                                     <li><a href="todos-lugares.php">Todos los lugares</a></li>
-                                    <li><a href="agregar-lugar.html">Agregar lugar</a></li>
+                                    <li><a href="agregar-lugar.php">Agregar lugar</a></li>
                                     <li><a href="info-lugar.html">Información del lugar</a></li>
                                 </ul>
                             </li>
