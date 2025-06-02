@@ -301,7 +301,22 @@
                             $email = $empleado['email'];
                             $fecha_nacimiento = $empleado['fecha_nacimiento'];
                             $genero = $empleado['genero'];
-                            $departamento = $empleado['puesto_asignado']; 
+                            $id_lugar = $empleado['puesto_asignado'];
+
+                            $sql = "SELECT nombre FROM lugares_seguridad WHERE id_lugar = ?";
+                            $stmt = $conn->prepare($sql);
+                            $stmt->bind_param("i", $id_lugar);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            $nombre_lugar = '';
+                            if ($row = $result->fetch_assoc()) {
+                                $nombre_lugar = $row['nombre'];
+                            }
+                            $departamento = $nombre_lugar;
+
+
+
                             $estado_civil = $empleado['estado_civil'];
                             $formacion = $empleado['formacion'];
                             $experiencia = $empleado['experiencia'];
@@ -495,7 +510,7 @@
                                                         <?php endif; ?>
                                                     </div>
                                                 </div>
-
+                                                <br><br><br>
                                                 <!-- Formación -->
                                                 <div class="row mg-b-15">
                                                     <div class="col-lg-12">
