@@ -380,7 +380,7 @@ if (!$lugares) {
                 <select name="puesto_asignado" class="form-control" required>
                     <option value="" disabled selected>Seleccionar lugar</option>
                     <?php while ($lugar = mysqli_fetch_assoc($lugares)): ?>
-                        <option value="<?= $lugar['id_lugar'] ?>"><?= $lugar['nombre'] ?></option>
+                        <option value="<?= $lugar['nombre'] ?>"><?= $lugar['nombre'] ?></option>
                     <?php endwhile; ?>
                 </select>
             </div>
