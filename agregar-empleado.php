@@ -266,16 +266,25 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="review-content-section">
                                         <div id="dropzone1" class="pro-ad">
-                                          <?php
-// Conexión a base de datos
-include("db_config.php");
-$lugares = mysqli_query($conexion, "SELECT id, nombre FROM lugares");
+                                           
+                                          
+                                            <?php
+// Conexión a la base de datos
+include 'db_config.php';
+
+// Consulta los lugares desde la tabla correcta
+$lugares = mysqli_query($conexion, "SELECT id_lugar, nombre FROM lugares_seguridad");
+
+if (!$lugares) {
+    die("Error al consultar lugares: " . mysqli_error($conexion));
+}
 ?>
 
 <form action="registrar_empleado.php" method="POST" enctype="multipart/form-data" id="form-empleado">
     <div class="row">
         <!-- Columna izquierda -->
         <div class="col-lg-6">
+            <!-- Foto de Perfil -->
             <div class="form-group">
                 <label>Foto de Perfil (JPG o PNG)</label>
                 <input type="file" name="foto_perfil_ruta" accept="image/jpeg,image/png" class="form-control">
@@ -283,27 +292,27 @@ $lugares = mysqli_query($conexion, "SELECT id, nombre FROM lugares");
 
             <div class="form-group">
                 <label>Nombre Completo</label>
-                <input name="nombre" type="text" class="form-control" placeholder="Nombre completo" required>
+                <input name="nombre" type="text" class="form-control" required>
             </div>
 
             <div class="form-group">
                 <label>Cédula</label>
-                <input name="cedula" type="text" class="form-control" placeholder="Cédula de identidad" required>
+                <input name="cedula" type="text" class="form-control" required>
             </div>
 
             <div class="form-group">
                 <label>Dirección</label>
-                <input name="direccion" type="text" class="form-control" placeholder="Dirección de residencia">
+                <input name="direccion" type="text" class="form-control">
             </div>
 
             <div class="form-group">
                 <label>Celular</label>
-                <input name="celular" type="text" class="form-control" placeholder="Número de celular">
+                <input name="celular" type="text" class="form-control">
             </div>
 
             <div class="form-group">
                 <label>Correo Electrónico</label>
-                <input name="email" type="email" class="form-control" placeholder="Correo electrónico">
+                <input name="email" type="email" class="form-control">
             </div>
 
             <div class="form-group">
@@ -334,7 +343,7 @@ $lugares = mysqli_query($conexion, "SELECT id, nombre FROM lugares");
 
             <div class="form-group">
                 <label>Observaciones</label>
-                <textarea name="observaciones" class="form-control" placeholder="Notas u observaciones adicionales"></textarea>
+                <textarea name="observaciones" class="form-control"></textarea>
             </div>
         </div>
 
@@ -367,20 +376,20 @@ $lugares = mysqli_query($conexion, "SELECT id, nombre FROM lugares");
             </div>
 
             <div class="form-group">
-                <label>Puesto Asignado</label>
-                <select name="puesto_asignado" class="form-control">
+                <label>Puesto Asignado (Lugar)</label>
+                <select name="puesto_asignado" class="form-control" required>
                     <option value="" disabled selected>Seleccionar lugar</option>
-                    <?php while($lugar = mysqli_fetch_assoc($lugares)): ?>
-                        <option value="<?= $lugar['nombre'] ?>"><?= $lugar['nombre'] ?></option>
+                    <?php while ($lugar = mysqli_fetch_assoc($lugares)): ?>
+                        <option value="<?= $lugar['id_lugar'] ?>"><?= $lugar['nombre'] ?></option>
                     <?php endwhile; ?>
                 </select>
             </div>
 
             <div class="form-group">
                 <label>Cargo</label>
-                <select name="cargo" class="form-control">
+                <select name="cargo" class="form-control" required>
                     <option value="" disabled selected>Seleccionar cargo</option>
-                    <option value="Guarda de seguridad">Guarda de seguridad</option>
+                    <option value="Guarda de Seguridad">Guarda de Seguridad</option>
                     <option value="Supervisor">Supervisor</option>
                     <option value="Ingeniero">Ingeniero</option>
                 </select>
@@ -390,10 +399,10 @@ $lugares = mysqli_query($conexion, "SELECT id, nombre FROM lugares");
                 <label>Sueldo</label>
                 <select name="sueldo" class="form-control">
                     <option value="" disabled selected>Seleccionar tipo de sueldo</option>
-                    <option value="Salario básico">Salario básico</option>
-                    <option value="Salario básico + horas extras">Salario básico + horas extras</option>
-                    <option value="Salario profesional">Salario profesional</option>
-                    <option value="Salario supervisor">Salario supervisor</option>
+                    <option value="Salario Básico + Horas Extras">Salario Básico + Horas Extras</option>
+                    <option value="Salario Básico">Salario Básico</option>
+                    <option value="Salario Profesional">Salario Profesional</option>
+                    <option value="Salario Supervisor">Salario Supervisor</option>
                 </select>
             </div>
 
@@ -414,10 +423,9 @@ $lugares = mysqli_query($conexion, "SELECT id, nombre FROM lugares");
     </div>
 
     <div class="text-center mt-3">
-        <button type="submit" class="btn btn-primary">Guardar Empleado</button>
+        <button type="submit" class="btn btn-primary" id="submitBtn">Guardar Empleado</button>
     </div>
 </form>
-
 
                                         </div>
                                     </div>
