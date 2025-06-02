@@ -361,7 +361,7 @@
 
                                 $nombreLugar = isset($_GET['nombre']) ? $_GET['nombre'] : '';
 
-                                $sqlLugar = "SELECT id FROM lugares_seguridad WHERE nombre = ?";
+                                $sqlLugar = "SELECT id_lugar FROM lugares_seguridad WHERE nombre = ?";
                                 $stmtLugar = $conexion->prepare($sqlLugar);
                                 $stmtLugar->bind_param("s", $nombreLugar);
                                 $stmtLugar->execute();
