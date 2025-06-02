@@ -244,7 +244,7 @@
             </div>
         </div>
         <!-- End Welcome area -->   
-         <?php
+                <?php
 include('db_config.php');
 
 // Consulta todos los empleados
@@ -263,12 +263,13 @@ if ($resultado && $resultado->num_rows > 0) {
             $edad = $hoy->diff($fecha_nac)->y . ' años';
         }
 
-        // Ruta a la imagen
-        $foto = (!empty($empleado['foto_perfil_ruta']) && file_exists('fotos/' . $empleado['foto_perfil_ruta']))
-            ? 'fotos/' . $empleado['foto_perfil_ruta']
-            : 'img/usuario.png'; // Imagen por defecto si no hay foto
+        // Usar la ruta directamente desde la base de datos
+        $foto = (!empty($empleado['foto_perfil_ruta']) && file_exists($empleado['foto_perfil_ruta']))
+            ? $empleado['foto_perfil_ruta']
+            : 'img/usuario.png'; // Imagen por defecto
 
         // Información adicional
+        $nombre = htmlspecialchars($empleado['nombre']);
         $experiencia = !empty($empleado['experiencia']) ? htmlspecialchars($empleado['experiencia']) : 'Sin especificar';
         $puesto = !empty($empleado['puesto_asignado']) ? htmlspecialchars($empleado['puesto_asignado']) : 'Sin asignar';
 
@@ -276,8 +277,8 @@ if ($resultado && $resultado->num_rows > 0) {
         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
             <div class="courses-inner res-mg-b-30">
                 <div class="courses-title text-center">
-                    <a href="#"><img src="' . $foto . '" alt="Foto de ' . htmlspecialchars($empleado['nombre']) . '" style="height: 200px; object-fit: cover; border-radius: 50%; width: 200px;"></a>
-                    <h2>' . htmlspecialchars($empleado['nombre']) . '</h2>
+                    <a href="#"><img src="' . $foto . '" alt="Foto de ' . $nombre . '" style="height: 200px; object-fit: cover; border-radius: 50%; width: 200px;"></a>
+                    <h2>' . $nombre . '</h2>
                 </div>
                 <div class="courses-alaltic text-center">
                     <span class="cr-ic-r">
@@ -303,6 +304,7 @@ if ($resultado && $resultado->num_rows > 0) {
     echo "<p class='text-center'>No hay empleados registrados aún.</p>";
 }
 ?>
+
 
        <div class="footer-copyright-area">
             <div class="container-fluid">
