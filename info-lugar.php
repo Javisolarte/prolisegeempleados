@@ -362,6 +362,7 @@
                                         <h3>Empleados Asignados a este Lugar</h3>
                                         <hr />
                                         <?php
+                                         include("db_config.php");
                                         $stmt_empleados = $conexion->prepare("SELECT * FROM empleados WHERE puesto_asignado = ?");
                                         $stmt_empleados->bind_param("s", $lugar_id);
                                         $stmt_empleados->execute();
