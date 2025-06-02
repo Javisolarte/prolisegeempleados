@@ -1,5 +1,7 @@
-
 <?php
+// Iniciar el buffer de salida para evitar errores de cabecera
+ob_start();
+
 require 'db_config.php';
 require_once 'dompdf/autoload.inc.php';
 
@@ -11,10 +13,7 @@ $options = new Options();
 $options->set('defaultFont', 'Arial');
 $dompdf = new Dompdf($options);
 
-// Capturar salida para evitar "headers already sent"
-ob_start();
-
-// Consulta
+// Consulta a la base de datos
 $sql = "SELECT 
             e.nombre, 
             e.cedula, 
@@ -29,22 +28,22 @@ $sql = "SELECT
 
 $resultado = $conexion->query($sql);
 
-// HTML inicial
-echo '<h1 style="text-align:center;">Listado de Empleados</h1>';
+// Construir el HTML del PDF
+$html = '<h2 style="text-align: center;">Listado de Empleados</h2>';
 
 if ($resultado && $resultado->num_rows > 0) {
-    echo '<table border="1" cellspacing="0" cellpadding="5" width="100%">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Cédula</th>
-                    <th>Edad</th>
-                    <th>Experiencia</th>
-                    <th>Lugar</th>
-                    <th>Teléfono</th>
-                </tr>
-            </thead>
-            <tbody>';
+    $html .= '<table border="1" cellpadding="5" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cédula</th>
+                        <th>Edad</th>
+                        <th>Experiencia</th>
+                        <th>Lugar</th>
+                        <th>Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody>';
 
     while ($empleado = $resultado->fetch_assoc()) {
         // Calcular edad
@@ -55,38 +54,35 @@ if ($resultado && $resultado->num_rows > 0) {
             $edad = $hoy->diff($fecha_nac)->y . ' años';
         }
 
-        // Escapar datos con fallback
-        $nombre     = htmlspecialchars($empleado['nombre'] ?? '');
-        $cedula     = htmlspecialchars($empleado['cedula'] ?? '');
+        // Limpiar campos
+        $nombre      = htmlspecialchars($empleado['nombre'] ?? '');
+        $cedula      = htmlspecialchars($empleado['cedula'] ?? '');
         $experiencia = htmlspecialchars($empleado['experiencia'] ?? 'Sin especificar');
-        $lugar      = htmlspecialchars($empleado['lugar_nombre'] ?? 'No asignado');
-        $telefono   = htmlspecialchars($empleado['lugar_telefono'] ?? 'Sin teléfono');
+        $lugar       = htmlspecialchars($empleado['lugar_nombre'] ?? 'No asignado');
+        $telefono    = htmlspecialchars($empleado['lugar_telefono'] ?? 'Sin teléfono');
 
-        echo "<tr>
-                <td>{$nombre}</td>
-                <td>{$cedula}</td>
-                <td>{$edad}</td>
-                <td>{$experiencia}</td>
-                <td>{$lugar}</td>
-                <td>{$telefono}</td>
-              </tr>";
+        $html .= "<tr>
+                    <td>$nombre</td>
+                    <td>$cedula</td>
+                    <td>$edad</td>
+                    <td>$experiencia</td>
+                    <td>$lugar</td>
+                    <td>$telefono</td>
+                  </tr>";
     }
 
-    echo '</tbody></table>';
+    $html .= '</tbody></table>';
 } else {
-    echo '<p>No hay empleados registrados.</p>';
+    $html .= '<p>No hay empleados registrados.</p>';
 }
 
-// Obtener el HTML final sin enviarlo al navegador
-$html = ob_get_clean();
+// Finalizar el buffer antes de enviar encabezados
+ob_end_clean();
 
-// Cargar HTML en Dompdf
+// Generar el PDF
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
-
-// Renderizar PDF
 $dompdf->render();
 
-// Mostrar en el navegador sin descargar automáticamente
+// Mostrar el PDF en el navegador
 $dompdf->stream("reporte-empleados.pdf", ["Attachment" => false]);
-?>
