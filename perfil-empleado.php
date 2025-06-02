@@ -220,7 +220,7 @@
                                                 <li><a href="todos-empleados.php">Todos los empleados</a></li>
                                                 <li><a href="agregar-empleado.php">Agregar empleado</a></li>
 
-                                                <li><a href="perfil-empleado.php">Perfil del empleado</a></li>
+                                                
                                             </ul>
                                         </li>
                                         <li>
@@ -230,7 +230,7 @@
                                             <ul id="menuLugares" class="collapse dropdown-header-top">
                                                 <li><a href="todos-lugares.php">Todos los lugares</a></li>
                                                 <li><a href="agregar-lugar.php">Agregar lugar</a></li>
-                                                <li><a href="info-lugar.html">Información del lugar</a></li>
+                                               
                                             </ul>
                                         </li>
                                     </ul>

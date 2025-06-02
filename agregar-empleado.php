@@ -101,7 +101,6 @@
                             <li><a title="Todos los empleados" href="todos-empleados.php"><span class="mini-sub-pro">Todos los empleados</span></a></li>
                             <li><a title="Agregar empleado" href="agregar-empleado.php"><span class="mini-sub-pro">Agregar empleado</span></a></li>
                            
-                            <li><a title="Perfil del empleado" href="perfil-empleado.php"><span class="mini-sub-pro">Perfil del empleado</span></a></li>
                         </ul>
                     </li>
                     <li>
@@ -112,7 +111,6 @@
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="Todos los lugares" href="todos-lugares.php"><span class="mini-sub-pro">Todos los lugares</span></a></li>
                             <li><a title="Agregar lugar" href="agregar-lugar.php"><span class="mini-sub-pro">Agregar lugar</span></a></li>
-                            <li><a title="Información del lugar" href="info-lugar.html"><span class="mini-sub-pro">Información del lugar</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -200,7 +198,7 @@
                                     <li><a href="todos-empleados.php">Todos los empleados</a></li>
                                     <li><a href="agregar-empleado.php">Agregar empleado</a></li>
                                     
-                                    <li><a href="perfil-empleado.php">Perfil del empleado</a></li>
+                                    
                                 </ul>
                             </li>
                             <li>
@@ -210,7 +208,7 @@
                                 <ul id="menuLugares" class="collapse dropdown-header-top">
                                     <li><a href="todos-lugares.php">Todos los lugares</a></li>
                                     <li><a href="agregar-lugar.php">Agregar lugar</a></li>
-                                    <li><a href="info-lugar.html">Información del lugar</a></li>
+                                   
                                 </ul>
                             </li>
                         </ul>
