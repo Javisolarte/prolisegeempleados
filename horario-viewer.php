@@ -288,21 +288,43 @@
                 </div>
             </div>
         </div>
-        <div class="pdf-viewer-area mg-b-15">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                    </div>
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                        <div class="pdf-single-pro">
-                            <a class="media" href="pdf/mamunur.pdf"></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                    </div>
+        <?php
+include 'db_config.php';
+
+// Obtener mes actual (ej: Junio)
+$mes_actual = ucfirst(strftime("%B", time())); // Si tu servidor está en español, o usa date("F") en inglés
+
+// Consulta a la base de datos para buscar el archivo del mes actual
+$stmt = $conexion->prepare("SELECT ruta_horario FROM horarios WHERE mes = ? ORDER BY fecha_subida DESC LIMIT 1");
+$stmt->bind_param("s", $mes_actual);
+$stmt->execute();
+$resultado = $stmt->get_result();
+
+$ruta_archivo = null;
+if ($fila = $resultado->fetch_assoc()) {
+    $ruta_archivo = $fila['ruta_horario'];
+}
+$stmt->close();
+?>
+
+<div class="pdf-viewer-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                <div class="pdf-single-pro">
+                    <?php if ($ruta_archivo): ?>
+                        <a class="media" href="<?= $ruta_archivo ?>"></a>
+                    <?php else: ?>
+                        <p>No hay horario disponible para el mes de <strong><?= $mes_actual ?></strong>.</p>
+                    <?php endif; ?>
                 </div>
             </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
         </div>
+    </div>
+</div>
+
         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">
