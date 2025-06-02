@@ -357,7 +357,7 @@
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                                 <?php
-                                include 'db_conexion.php';
+                                include 'db_config.php';
 
                                 $nombreLugar = isset($_GET['nombre']) ? $_GET['nombre'] : '';
 
@@ -368,7 +368,7 @@
                                 $resultLugar = $stmtLugar->get_result();
 
                                 if ($lugar = $resultLugar->fetch_assoc()) {
-                                    $lugarID = $lugar['id'];
+                                    $lugarID = $lugar['id_lugar'];
 
                                     $sqlEmp = "SELECT * FROM empleados WHERE puesto_asignado = ?";
                                     $stmtEmp = $conexion->prepare($sqlEmp);
