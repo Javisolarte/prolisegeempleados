@@ -301,6 +301,7 @@
                             $email = $empleado['email'];
                             $fecha_nacimiento = $empleado['fecha_nacimiento'];
                             $genero = $empleado['genero'];
+                            $departamento = $empleado['puesto_asignado']; 
                             $estado_civil = $empleado['estado_civil'];
                             $formacion = $empleado['formacion'];
                             $experiencia = $empleado['experiencia'];
