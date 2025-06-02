@@ -295,10 +295,23 @@
 
                             // Variables para insertar en el HTML
                             $nombre = $empleado['nombre'];
-                            $email = $empleado['email'];
-                            $telefono = $empleado['celular'];
+                            $cedula = $empleado['cedula'];
                             $direccion = $empleado['direccion'];
-                            $departamento = $empleado['puesto_asignado']; // o 'cargo' si prefieres
+                            $telefono = $empleado['celular'];
+                            $email = $empleado['email'];
+                            $fecha_nacimiento = $empleado['fecha_nacimiento'];
+                            $genero = $empleado['genero'];
+                            $estado_civil = $empleado['estado_civil'];
+                            $formacion = $empleado['formacion'];
+                            $experiencia = $empleado['experiencia'];
+                            $puesto = $empleado['puesto_asignado'];
+                            $cargo = $empleado['cargo'];
+                            $tipo_contrato = $empleado['tipo_contrato'];
+                            $sueldo = $empleado['sueldo'];
+                            $fecha_ingreso = $empleado['fecha_ingreso'];
+                            $hoja_vida = $empleado['hoja_vida_ruta'];
+                            $estado = $empleado['estado'];
+                            $observaciones = $empleado['observaciones'];// o 'cargo' si prefieres
                             $foto = !empty($empleado['foto_perfil_ruta']) ? $empleado['foto_perfil_ruta'] : 'img/profile/default.png';
                             ?>
 
@@ -341,26 +354,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <div class="address-hr">
-                                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                                    <h3>500</h3>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <div class="address-hr">
-                                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                                    <h3>900</h3>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <div class="address-hr">
-                                                    <a href="#"><i class="fa fa-google-plus"></i></a>
-                                                    <h3>600</h3>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -386,182 +380,149 @@
                                 <li><a href="#INFORMATION">Actualizar Datos</a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
+
+
                                 <div class="product-tab-list tab-pane fade active in" id="description">
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-12">
                                             <div class="review-content-section">
+
+                                                <!-- Datos principales -->
                                                 <div class="row">
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                         <div class="address-hr biography">
-                                                            <p><b>Full Name</b><br /> Fly Zend</p>
+                                                            <p><b>Nombre completo</b><br />
+                                                                <?php echo htmlspecialchars($nombre); ?></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                         <div class="address-hr biography">
-                                                            <p><b>Mobile</b><br /> 01962067309</p>
+                                                            <p><b>Cédula</b><br />
+                                                                <?php echo htmlspecialchars($cedula); ?></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                         <div class="address-hr biography">
-                                                            <p><b>Email</b><br /> fly@gmail.com</p>
+                                                            <p><b>Teléfono</b><br />
+                                                                <?php echo htmlspecialchars($telefono); ?></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                         <div class="address-hr biography">
-                                                            <p><b>Location</b><br /> UK</p>
+                                                            <p><b>Email</b><br />
+                                                                <?php echo htmlspecialchars($email); ?></p>
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <!-- Otros datos personales -->
                                                 <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="content-profile">
-                                                            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate
-                                                                eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-                                                                venenatis vitae, justo. Nullam dictum felis eu pede
-                                                                mollis pretium. Integer tincidunt.Cras
-                                                                dapibus. Vivamus elementum semper nisi. Aenean vulputate
-                                                                eleifend tellus. Aenean leo ligula, porttitor eu,
-                                                                consequat vitae, eleifend ac, enim.</p>
-                                                            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate
-                                                                eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-                                                                venenatis vitae, justo. Nullam dictum felis eu pede
-                                                                mollis pretium. Integer tincidunt.Cras
-                                                                dapibus. Vivamus elementum semper nisi. Aenean vulputate
-                                                                eleifend tellus. Aenean leo ligula, porttitor eu,
-                                                                consequat vitae, eleifend ac, enim.</p>
-                                                            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate
-                                                                eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-                                                                venenatis vitae, justo. Nullam dictum felis eu pede
-                                                                mollis pretium. Integer tincidunt.Cras
-                                                                dapibus. Vivamus elementum semper nisi. Aenean vulputate
-                                                                eleifend tellus. Aenean leo ligula, porttitor eu,
-                                                                consequat vitae, eleifend ac, enim.</p>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Fecha de nacimiento</b><br />
+                                                                <?php echo htmlspecialchars($fecha_nacimiento); ?></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Género</b><br />
+                                                                <?php echo htmlspecialchars($genero); ?></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Estado Civil</b><br />
+                                                                <?php echo htmlspecialchars($estado_civil); ?></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Dirección</b><br />
+                                                                <?php echo htmlspecialchars($direccion); ?></p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row mg-b-15">
-                                                    <div class="col-lg-12">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="skill-title">
-                                                                    <h2>Skill Set</h2>
-                                                                    <hr />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="progress-skill">
-                                                            <h2>Java</h2>
-                                                            <div class="progress progress-mini">
-                                                                <div style="width: 90%;"
-                                                                    class="progress-bar progress-yellow"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="progress-skill">
-                                                            <h2>Php</h2>
-                                                            <div class="progress progress-mini">
-                                                                <div style="width: 80%;"
-                                                                    class="progress-bar progress-green"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="progress-skill">
-                                                            <h2>Apps</h2>
-                                                            <div class="progress progress-mini">
-                                                                <div style="width: 70%;"
-                                                                    class="progress-bar progress-blue"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="progress-skill">
-                                                            <h2>C#</h2>
-                                                            <div class="progress progress-mini">
-                                                                <div style="width: 60%;"
-                                                                    class="progress-bar progress-red"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mg-b-15">
-                                                    <div class="col-lg-12">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="skill-title">
-                                                                    <h2>Education</h2>
-                                                                    <hr />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="ex-pro">
-                                                            <ul>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mg-b-15">
-                                                    <div class="col-lg-12">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="skill-title">
-                                                                    <h2>Experience</h2>
-                                                                    <hr />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="ex-pro">
-                                                            <ul>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+                                                <!-- Información laboral -->
                                                 <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="skill-title">
-                                                                    <h2>Subjects</h2>
-                                                                    <hr />
-                                                                </div>
-                                                            </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Cargo</b><br />
+                                                                <?php echo htmlspecialchars($cargo); ?></p>
                                                         </div>
-                                                        <div class="ex-pro">
-                                                            <ul>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</li>
-                                                            </ul>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Puesto asignado</b><br />
+                                                                <?php echo htmlspecialchars($puesto); ?></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Tipo de contrato</b><br />
+                                                                <?php echo htmlspecialchars($tipo_contrato); ?></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Sueldo</b><br />
+                                                                <?php echo htmlspecialchars($sueldo); ?></p>
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <!-- Fechas y estado -->
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Fecha de ingreso</b><br />
+                                                                <?php echo htmlspecialchars($fecha_ingreso); ?></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Estado</b><br />
+                                                                <?php echo htmlspecialchars($estado); ?></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
+                                                        <?php if (!empty($hoja_vida)): ?>
+                                                            <a href="<?php echo htmlspecialchars($hoja_vida); ?>"
+                                                                class="btn btn-primary" download>
+                                                                <i class="fa fa-download"></i> Descargar Hoja de Vida
+                                                            </a>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Formación -->
+                                                <div class="row mg-b-15">
+                                                    <div class="col-lg-12">
+                                                        <h3>Formación Académica</h3>
+                                                        <p><?php echo nl2br(htmlspecialchars($formacion)); ?></p>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Experiencia -->
+                                                <div class="row mg-b-15">
+                                                    <div class="col-lg-12">
+                                                        <h3>Experiencia</h3>
+                                                        <p><?php echo nl2br(htmlspecialchars($experiencia)); ?></p>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Observaciones -->
+                                                <div class="row mg-b-15">
+                                                    <div class="col-lg-12">
+                                                        <h3>Observaciones</h3>
+                                                        <p><?php echo nl2br(htmlspecialchars($observaciones)); ?></p>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
 
 
                                 <div class="product-tab-list tab-pane fade" id="INFORMATION">
