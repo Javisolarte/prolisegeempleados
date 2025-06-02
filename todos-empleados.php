@@ -305,9 +305,11 @@ if ($resultado && $resultado->num_rows > 0) {
                     <p><span><i class="fa fa-user"></i></span> <b>Experiencia:</b> ' . $experiencia . '</p>
                     <p><span><i class="fa fa-building"></i></span> <b>Lugar:</b> ' . $lugar . '</p>
                 </div>
-                <div class="product-buttons text-center">
-                    <a href="perfil-empleado.php?cedula=' . $cedula . '" class="button-default cart-btn">Leer Más</a>
-                </div>
+               <div class="product-buttons text-center">
+                        <a href="perfil-empleado.php?cedula=' . $cedula . '">
+                            <button type="button" class="button-default cart-btn">Más Información</button>
+                        </a>
+                    </div>
             </div>
         </div>';
     }
