@@ -31,19 +31,6 @@ $fecha_ingreso = $_POST['fecha_ingreso'];
 $estado = $_POST['estado'];
 $observaciones = $_POST['observaciones'];
 
-// Validar que no esté registrada la cédula
-$verificaSql = "SELECT id FROM empleados WHERE cedula = ?";
-$verificaStmt = $conexion->prepare($verificaSql);
-$verificaStmt->bind_param("s", $cedula);
-$verificaStmt->execute();
-$verificaStmt->store_result();
-
-if ($verificaStmt->num_rows > 0) {
-    echo "Error: La cédula '$cedula' ya está registrada.";
-    exit;
-}
-$verificaStmt->close();
-
 // Procesar hoja de vida
 $hoja_vida_ruta = NULL;
 if (isset($_FILES['hoja_vida_ruta']) && $_FILES['hoja_vida_ruta']['error'] == 0) {
@@ -98,7 +85,11 @@ if ($stmt->execute()) {
         }
     </script>";
 } else {
-    echo "Error al guardar en la base de datos: " . $stmt->error;
+    if ($stmt->errno == 1062) { // Error de clave duplicada (UNIQUE)
+        echo "Error: Ya existe un empleado con la cédula '$cedula'.";
+    } else {
+        echo "Error al guardar en la base de datos: " . $stmt->error;
+    }
 }
 
 $stmt->close();
