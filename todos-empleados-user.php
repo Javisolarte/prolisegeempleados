@@ -311,6 +311,12 @@ if ($resultado && $resultado->num_rows > 0) {
 } else {
     echo "<p class='text-center'>No hay empleados registrados aún.</p>";
 }
+echo '<div class="text-center" style="margin: 20px;">
+        <a href="generar-pdf.php" target="_blank">
+            <button class="btn btn-primary">Imprimir PDF</button>
+        </a>
+      </div>';
+
 ?>
 
 
