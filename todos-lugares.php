@@ -243,107 +243,64 @@
                 </div>
             </div>
         </div>
-        <div class="courses-area">
+<?php
+// Mostrar errores
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Conectar a la base de datos
+include 'db_config.php';
+
+// Consultar todos los lugares
+$query = "SELECT * FROM lugares_seguridad ORDER BY id_lugar DESC";
+$resultado = mysqli_query($conexion, $query);
+?>
+
+<div class="courses-area">
     <div class="container-fluid">
         <div class="row">
-            <!-- Primer lugar: nombre -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="courses-inner res-mg-t-30 dk-res-t-pro-30">
-                    <div class="courses-title">
-                        <a href="#"><img src="img/courses/2.png" alt=""></a>
-                        <h2>Dirección</h2>
-                    </div>
-                    <div class="courses-alaltic">
-                        <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-video-camera"></i></span> 12</span>
-                        <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-user-secret"></i></span> 6</span>
-                        <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-phone"></i></span> +1 555 4321</span>
-                    </div>
-                    <div class="course-des">
-                        <p><b>Dirección:</b> Plaza Central 321</p>
-                        <p><b>Número de Cámaras:</b> 12</p>
-                        <p><b>Número de Guardas:</b> 6</p>
-                        <p><b>Teléfono:</b> +1 555 4321</p>
-                    </div>
-                    <div class="product-buttons">
-                        <button type="button" class="button-default cart-btn">Más Información</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Segundo lugar -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="courses-inner">
-                    <div class="courses-title">
-                        <a href="#"><img src="img/courses/2.png" alt=""></a>
-                        <h2>Dirección</h2>
-                    </div>
-                    <div class="courses-alaltic">
-                        <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-video-camera"></i></span> 10</span>
-                        <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-user-secret"></i></span> 3</span>
-                        <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-phone"></i></span> +1 555 5678</span>
-                    </div>
-                    <div class="course-des">
-                        <p><b>Dirección:</b> Avenida Siempre Viva 456</p>
-                        <p><b>Número de Cámaras:</b> 10</p>
-                        <p><b>Número de Guardas:</b> 3</p>
-                        <p><b>Teléfono:</b> +1 555 5678</p>
-                    </div>
-                    <div class="product-buttons">
-                        <button type="button" class="button-default cart-btn">Más Información</button>
+            <?php while ($lugar = mysqli_fetch_assoc($resultado)) : ?>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="courses-inner res-mg-t-30 dk-res-t-pro-30">
+                        <div class="courses-title">
+                            <a href="#">
+                                <img src="<?= htmlspecialchars($lugar['ruta_imagen']) ?>" alt="Imagen del lugar" style="height: 200px; width: 100%; object-fit: cover;">
+                            </a>
+                            <h2><?= htmlspecialchars($lugar['nombre']) ?></h2>
+                        </div>
+                        <div class="courses-alaltic">
+                            <span class="cr-ic-r">
+                                <span class="course-icon"><i class="fa fa-video-camera"></i></span>
+                                <?= intval($lugar['numero_camaras']) ?>
+                            </span>
+                            <span class="cr-ic-r">
+                                <span class="course-icon"><i class="fa fa-user-secret"></i></span>
+                                <?= intval($lugar['numero_guardias']) ?>
+                            </span>
+                            <span class="cr-ic-r">
+                                <span class="course-icon"><i class="fa fa-phone"></i></span>
+                                <?= htmlspecialchars($lugar['telefono']) ?>
+                            </span>
+                        </div>
+                        <div class="course-des">
+                            <p><b>Dirección:</b> <?= htmlspecialchars($lugar['direccion']) ?></p>
+                            <p><b>Número de Cámaras:</b> <?= intval($lugar['numero_camaras']) ?></p>
+                            <p><b>Número de Guardas:</b> <?= intval($lugar['numero_guardias']) ?></p>
+                            <p><b>Teléfono:</b> <?= htmlspecialchars($lugar['telefono']) ?></p>
+                        </div>
+                        <div class="product-buttons">
+                            <button type="button" class="button-default cart-btn">Más Información</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Tercer lugar -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="courses-inner res-mg-t-30 dk-res-t-pro-30">
-                    <div class="courses-title">
-                        <a href="#"><img src="img/courses/2.png" alt=""></a>
-                        <h2>Dirección</h2>
-                    </div>
-                    <div class="courses-alaltic">
-                        <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-video-camera"></i></span> 15</span>
-                        <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-user-secret"></i></span> 7</span>
-                        <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-phone"></i></span> +1 555 9876</span>
-                    </div>
-                    <div class="course-des">
-                        <p><b>Dirección:</b> Calle Principal 789</p>
-                        <p><b>Número de Cámaras:</b> 15</p>
-                        <p><b>Número de Guardas:</b> 7</p>
-                        <p><b>Teléfono:</b> +1 555 9876</p>
-                    </div>
-                    <div class="product-buttons">
-                        <button type="button" class="button-default cart-btn">Más Información</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cuarto lugar -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="courses-inner res-mg-t-30 dk-res-t-pro-30">
-                    <div class="courses-title">
-                        <a href="#"><img src="img/courses/2.png" alt=""></a>
-                        <h2>Dirección</h2>
-                    </div>
-                    <div class="courses-alaltic">
-                        <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-video-camera"></i></span> 12</span>
-                        <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-user-secret"></i></span> 6</span>
-                        <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-phone"></i></span> +1 555 4321</span>
-                    </div>
-                    <div class="course-des">
-                        <p><b>Dirección:</b> Plaza Central 321</p>
-                        <p><b>Número de Cámaras:</b> 12</p>
-                        <p><b>Número de Guardas:</b> 6</p>
-                        <p><b>Teléfono:</b> +1 555 4321</p>
-                    </div>
-                    <div class="product-buttons">
-                        <button type="button" class="button-default cart-btn">Más Información</button>
-                    </div>
-                </div>
-            </div>
+            <?php endwhile; ?>
         </div>
     </div>
 </div>
+
+<?php mysqli_close($conexion); ?>
+
+        
 
        <div class="footer-copyright-area">
             <div class="container-fluid">
