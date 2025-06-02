@@ -388,143 +388,39 @@
                                                                 <div class="address-hr biography">
                                                                     <img src="<?php echo $empleado['foto_perfil_ruta']; ?>"
                                                                         style="width:100px; height:100px; border-radius:50%;">
-                                                                    <p><b>Full Name</b><br /> <?php echo $empleado['nombre']; ?>
+                                                                    <p><b>Nombre</b><br /> <?php echo $empleado['nombre']; ?>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="address-hr biography">
+                                                                    <p><b>Cedula</b><br /> <?php echo $empleado['cedula']; ?>
                                                                     </p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                                 <div class="address-hr biography">
-                                                                    <p><b>Mobile</b><br /> <?php echo $empleado['celular']; ?>
+                                                                    <p><b>Telefono</b><br /> <?php echo $empleado['celular']; ?>
                                                                     </p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                                 <div class="address-hr biography">
-                                                                    <p><b>Email</b><br /> <?php echo $empleado['email']; ?></p>
+                                                                    <p><b>Correo</b><br /> <?php echo $empleado['email']; ?></p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                                 <div class="address-hr biography">
-                                                                    <p><b>Location</b><br />
+                                                                    <p><b>Direccion</b><br />
                                                                         <?php echo $empleado['direccion']; ?></p>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="content-profile">
-                                                                    <p><?php echo $empleado['descripcion1']; ?></p>
-                                                                    <p><?php echo $empleado['descripcion2']; ?></p>
-                                                                    <p><?php echo $empleado['descripcion3']; ?></p>
-                                                                </div>
-                                                            </div>
+                                                        <div class="product-buttons text-center">
+                                                            <a href="perfil-empleado.php?cedula=' . $cedula . '">
+                                                                <button type="button" class="button-default cart-btn">Ver
+                                                                    mas de este empleado</button>
+                                                            </a>
                                                         </div>
-                                                        <div class="row mg-b-15">
-                                                            <div class="col-lg-12">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="skill-title">
-                                                                            <h2>Skill Set</h2>
-                                                                            <hr />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="progress-skill">
-                                                                    <h2>Java</h2>
-                                                                    <div class="progress progress-mini">
-                                                                        <div style="width: 90%;"
-                                                                            class="progress-bar progress-yellow"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="progress-skill">
-                                                                    <h2>Php</h2>
-                                                                    <div class="progress progress-mini">
-                                                                        <div style="width: 80%;"
-                                                                            class="progress-bar progress-green"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="progress-skill">
-                                                                    <h2>Apps</h2>
-                                                                    <div class="progress progress-mini">
-                                                                        <div style="width: 70%;"
-                                                                            class="progress-bar progress-blue"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="progress-skill">
-                                                                    <h2>C#</h2>
-                                                                    <div class="progress progress-mini">
-                                                                        <div style="width: 60%;"
-                                                                            class="progress-bar progress-red"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mg-b-15">
-                                                            <div class="col-lg-12">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="skill-title">
-                                                                            <h2>Education</h2>
-                                                                            <hr />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="ex-pro">
-                                                                    <ul>
-                                                                        <li><i class="fa fa-angle-right"></i> Título
-                                                                            universitario en desarrollo web</li>
-                                                                        <li><i class="fa fa-angle-right"></i> Curso avanzado en
-                                                                            seguridad informática</li>
-                                                                        <li><i class="fa fa-angle-right"></i> Certificación en
-                                                                            bases de datos</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mg-b-15">
-                                                            <div class="col-lg-12">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="skill-title">
-                                                                            <h2>Experience</h2>
-                                                                            <hr />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="ex-pro">
-                                                                    <ul>
-                                                                        <li><i class="fa fa-angle-right"></i> Desarrollador en
-                                                                            Empresa X - 2 años</li>
-                                                                        <li><i class="fa fa-angle-right"></i> Analista en
-                                                                            Empresa Y - 1 año</li>
-                                                                        <li><i class="fa fa-angle-right"></i> Freelance Full
-                                                                            Stack - 3 años</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="skill-title">
-                                                                            <h2>Subjects</h2>
-                                                                            <hr />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="ex-pro">
-                                                                    <ul>
-                                                                        <li><i class="fa fa-angle-right"></i> Programación
-                                                                            orientada a objetos</li>
-                                                                        <li><i class="fa fa-angle-right"></i> Diseño de
-                                                                            interfaces</li>
-                                                                        <li><i class="fa fa-angle-right"></i> Seguridad de
-                                                                            aplicaciones</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
