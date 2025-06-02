@@ -107,6 +107,16 @@
                             <li><a title="Agregar lugar" href="agregar-lugar.php"><span class="mini-sub-pro">Agregar lugar</span></a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="has-arrow" href="todos-lugares.php" aria-expanded="false">
+                            <span class="educate-icon educate-course icon-wrap"></span> 
+                            <span class="mini-click-non">Horarios</span>
+                        </a>
+                        <ul class="submenu-angle" aria-expanded="false">
+                            <li><a title="Ver horario" href="horario-viewer.php"><span class="mini-sub-pro">Horarios</span></a></li>
+                            <li><a title="Agregar horario" href="agregar-horario.php"><span class="mini-sub-pro">Agregar horario</span></a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -202,6 +212,16 @@
                                 <ul id="menuLugares" class="collapse dropdown-header-top">
                                     <li><a href="todos-lugares.php">Todos los lugares</a></li>
                                     <li><a href="agregar-lugar.php">Agregar lugar</a></li>
+                                   
+                                </ul>
+                            </li>
+                            <li>
+                                <a data-toggle="collapse" data-target="#menuHorarios" href="#">Horarios
+                                    <span class="admin-project-icon edu-icon edu-down-arrow"></span>
+                                </a>
+                                <ul id="menuLugares" class="collapse dropdown-header-top">
+                                    <li><a href="horario-viewer.php">Horarios</a></li>
+                                    <li><a href="agregar-horario">Agregar horarios</a></li>
                                    
                                 </ul>
                             </li>
