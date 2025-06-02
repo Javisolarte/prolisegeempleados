@@ -301,7 +301,7 @@
                             $email = $empleado['email'];
                             $fecha_nacimiento = $empleado['fecha_nacimiento'];
                             $genero = $empleado['genero'];
-                            
+
                             $estado_civil = $empleado['estado_civil'];
                             $formacion = $empleado['formacion'];
                             $experiencia = $empleado['experiencia'];
@@ -505,7 +505,7 @@
                                                                 <?php echo htmlspecialchars($estado); ?></p>
                                                         </div>
                                                     </div>
-                                                   
+
                                                 </div>
                                                 <br><br><br>
                                                 <!-- Formación -->
@@ -531,175 +531,203 @@
                                                         <p><?php echo nl2br(htmlspecialchars($observaciones)); ?></p>
                                                     </div>
                                                 </div>
-                                                <!-- Hoja de Vida -->   <br><br><br><br>
-                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-                                                        <?php if (!empty($hoja_vida)): ?>
-                                                            <a href="<?php echo htmlspecialchars($hoja_vida); ?>"
-                                                                class="btn btn-primary" download>
-                                                                <i class="fa fa-download"></i> Descargar Hoja de Vida
-                                                            </a>
-                                                        <?php endif; ?>
-                                                    </div>
+                                                <!-- Hoja de Vida --> <br><br><br><br>
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
+                                                    <?php if (!empty($hoja_vida)): ?>
+                                                        <a href="<?php echo htmlspecialchars($hoja_vida); ?>"
+                                                            class="btn btn-primary" download>
+                                                            <i class="fa fa-download"></i> Descargar Hoja de Vida
+                                                        </a>
+                                                    <?php endif; ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-<?php
+                                <?php
 
 
-$lugares = mysqli_query($conexion, "SELECT id_lugar, nombre FROM lugares_seguridad");
+                                $lugares = mysqli_query($conexion, "SELECT id_lugar, nombre FROM lugares_seguridad");
 
-if (!$lugares) {
-    die("Error al consultar lugares: " . mysqli_error($conexion));
-}
-?>
+                                if (!$lugares) {
+                                    die("Error al consultar lugares: " . mysqli_error($conexion));
+                                }
+                                ?>
                                 <div class="product-tab-list tab-pane fade" id="INFORMATION">
-                                    <form action="/update" method="POST" enctype="multipart/form-data" id="form-empleado">
-    <div class="row">
-        <!-- Columna izquierda -->
-        <div class="col-lg-6">
-            <!-- Foto de Perfil -->
-            <div class="form-group">
-                <label>Foto de Perfil (JPG o PNG)</label>
-                <input type="file" name="foto_perfil_ruta" accept="image/jpeg,image/png" class="form-control">
-            </div>
+                                    <form action="actualizar-empleado.php" method="POST" enctype="multipart/form-data"
+                                        id="form-empleado">
+                                        <div class="row">
+                                            <!-- Columna izquierda -->
+                                            <div class="col-lg-6">
+                                                <!-- Foto de Perfil -->
+                                                <div class="form-group">
+                                                    <label>Foto de Perfil (JPG o PNG)</label>
+                                                    <input type="file" name="foto_perfil_ruta"
+                                                        accept="image/jpeg,image/png" class="form-control">
+                                                    <small>Actual: <?= $empleado['foto_perfil_ruta'] ?></small>
+                                                </div>
 
-            <div class="form-group">
-                <label>Nombre Completo</label>
-                <input name="nombre" type="text" class="form-control" required>
-            </div>
+                                                <div class="form-group">
+                                                    <label>Nombre Completo</label>
+                                                    <input name="nombre" type="text" class="form-control"
+                                                        value="<?= $empleado['nombre'] ?>" required>
+                                                </div>
 
-            <div class="form-group">
-                <label>Cédula</label>
-                <input name="cedula" type="text" class="form-control" required>
-            </div>
+                                                <div class="form-group">
+                                                    <label>Cédula</label>
+                                                    <input name="cedula" type="text" class="form-control"
+                                                        value="<?= $empleado['cedula'] ?>" required>
+                                                </div>
 
-            <div class="form-group">
-                <label>Dirección</label>
-                <input name="direccion" type="text" class="form-control">
-            </div>
+                                                <div class="form-group">
+                                                    <label>Dirección</label>
+                                                    <input name="direccion" type="text" class="form-control"
+                                                        value="<?= $empleado['direccion'] ?>">
+                                                </div>
 
-            <div class="form-group">
-                <label>Celular</label>
-                <input name="celular" type="text" class="form-control">
-            </div>
+                                                <div class="form-group">
+                                                    <label>Celular</label>
+                                                    <input name="celular" type="text" class="form-control"
+                                                        value="<?= $empleado['celular'] ?>">
+                                                </div>
 
-            <div class="form-group">
-                <label>Correo Electrónico</label>
-                <input name="email" type="email" class="form-control">
-            </div>
+                                                <div class="form-group">
+                                                    <label>Correo Electrónico</label>
+                                                    <input name="email" type="email" class="form-control"
+                                                        value="<?= $empleado['email'] ?>">
+                                                </div>
 
-            <div class="form-group">
-                <label>Fecha de Nacimiento</label>
-                <input name="fecha_nacimiento" type="date" class="form-control">
-            </div>
+                                                <div class="form-group">
+                                                    <label>Fecha de Nacimiento</label>
+                                                    <input name="fecha_nacimiento" type="date" class="form-control"
+                                                        value="<?= $empleado['fecha_nacimiento'] ?>">
+                                                </div>
 
-            <div class="form-group">
-                <label>Género</label>
-                <select name="genero" class="form-control">
-                    <option value="" disabled selected>Seleccionar género</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                    <option value="Otro">Otro</option>
-                </select>
-            </div>
+                                                <div class="form-group">
+                                                    <label>Género</label>
+                                                    <select name="genero" class="form-control">
+                                                        <option value="" disabled>Seleccionar género</option>
+                                                        <option value="Masculino" <?= $empleado['genero'] == 'Masculino' ? 'selected' : '' ?>>Masculino</option>
+                                                        <option value="Femenino" <?= $empleado['genero'] == 'Femenino' ? 'selected' : '' ?>>Femenino</option>
+                                                        <option value="Otro" <?= $empleado['genero'] == 'Otro' ? 'selected' : '' ?>>Otro</option>
+                                                    </select>
+                                                </div>
 
-            <div class="form-group">
-                <label>Estado Civil</label>
-                <select name="estado_civil" class="form-control">
-                    <option value="" disabled selected>Seleccionar estado civil</option>
-                    <option value="Soltero">Soltero</option>
-                    <option value="Casado">Casado</option>
-                    <option value="Divorciado">Divorciado</option>
-                    <option value="Viudo">Viudo</option>
-                </select>
-            </div>
+                                                <div class="form-group">
+                                                    <label>Estado Civil</label>
+                                                    <select name="estado_civil" class="form-control">
+                                                        <option value="" disabled>Seleccionar estado civil</option>
+                                                        <option value="Soltero" <?= $empleado['estado_civil'] == 'Soltero' ? 'selected' : '' ?>>Soltero</option>
+                                                        <option value="Casado" <?= $empleado['estado_civil'] == 'Casado' ? 'selected' : '' ?>>Casado</option>
+                                                        <option value="Divorciado"
+                                                            <?= $empleado['estado_civil'] == 'Divorciado' ? 'selected' : '' ?>>Divorciado</option>
+                                                        <option value="Viudo" <?= $empleado['estado_civil'] == 'Viudo' ? 'selected' : '' ?>>Viudo</option>
+                                                    </select>
+                                                </div>
 
-            <div class="form-group">
-                <label>Observaciones</label>
-                <textarea name="observaciones" class="form-control"></textarea>
-            </div>
-        </div>
+                                                <div class="form-group">
+                                                    <label>Observaciones</label>
+                                                    <textarea name="observaciones"
+                                                        class="form-control"><?= $empleado['observaciones'] ?></textarea>
+                                                </div>
+                                            </div>
 
-        <!-- Columna derecha -->
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label>Hoja de Vida (PDF)</label>
-                <input type="file" name="hoja_vida_ruta" accept="application/pdf" class="form-control" required>
-            </div>
+                                            <!-- Columna derecha -->
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Hoja de Vida (PDF)</label>
+                                                    <input type="file" name="hoja_vida_ruta" accept="application/pdf"
+                                                        class="form-control">
+                                                    <small>Actual: <?= $empleado['hoja_vida_ruta'] ?></small>
+                                                </div>
 
-            <div class="form-group">
-                <label>Formación Académica</label>
-                <select name="formacion" class="form-control">
-                    <option value="" disabled selected>Seleccionar formación</option>
-                    <option value="Bachiller">Bachiller</option>
-                    <option value="Técnica">Técnica</option>
-                    <option value="Tecnóloga">Tecnóloga</option>
-                    <option value="Profesional">Profesional</option>
-                </select>
-            </div>
+                                                <div class="form-group">
+                                                    <label>Formación Académica</label>
+                                                    <select name="formacion" class="form-control">
+                                                        <option value="" disabled>Seleccionar formación</option>
+                                                        <option value="Bachiller" <?= $empleado['formacion'] == 'Bachiller' ? 'selected' : '' ?>>Bachiller</option>
+                                                        <option value="Técnica" <?= $empleado['formacion'] == 'Técnica' ? 'selected' : '' ?>>Técnica</option>
+                                                        <option value="Tecnóloga" <?= $empleado['formacion'] == 'Tecnóloga' ? 'selected' : '' ?>>Tecnóloga</option>
+                                                        <option value="Profesional"
+                                                            <?= $empleado['formacion'] == 'Profesional' ? 'selected' : '' ?>>Profesional</option>
+                                                    </select>
+                                                </div>
 
-            <div class="form-group">
-                <label>Experiencia Laboral</label>
-                <select name="experiencia" class="form-control">
-                    <option value="" disabled selected>Seleccionar experiencia</option>
-                    <?php for ($i = 1; $i <= 10; $i++): ?>
-                        <option value="<?= $i ?> año<?= $i > 1 ? 's' : '' ?>"><?= $i ?> año<?= $i > 1 ? 's' : '' ?></option>
-                    <?php endfor; ?>
-                </select>
-            </div>
+                                                <div class="form-group">
+                                                    <label>Experiencia Laboral</label>
+                                                    <select name="experiencia" class="form-control">
+                                                        <option value="" disabled>Seleccionar experiencia</option>
+                                                        <?php for ($i = 1; $i <= 10; $i++): ?>
+                                                            <?php $valor = "$i año" . ($i > 1 ? 's' : ''); ?>
+                                                            <option value="<?= $valor ?>"
+                                                                <?= $empleado['experiencia'] == $valor ? 'selected' : '' ?>>
+                                                                <?= $valor ?>
+                                                            </option>
+                                                        <?php endfor; ?>
+                                                    </select>
+                                                </div>
 
-            <div class="form-group">
-                <label>Puesto Asignado (Lugar)</label>
-                <select name="puesto_asignado" class="form-control" required>
-                    <option value="" disabled selected>Seleccionar lugar</option>
-                    <?php while ($lugar = mysqli_fetch_assoc($lugares)): ?>
-                        <option value="<?= $lugar['id_lugar'] ?>"><?= $lugar['nombre'] ?></option>
-                    <?php endwhile; ?>
-                </select>
-            </div>
+                                                <div class="form-group">
+                                                    <label>Puesto Asignado (Lugar)</label>
+                                                    <select name="puesto_asignado" class="form-control" required>
+                                                        <option value="" disabled>Seleccionar lugar</option>
+                                                        <?php while ($lugar = mysqli_fetch_assoc($lugares)): ?>
+                                                            <option value="<?= $lugar['id_lugar'] ?>"
+                                                                <?= $empleado['puesto_asignado'] == $lugar['id_lugar'] ? 'selected' : '' ?>>
+                                                                <?= $lugar['nombre'] ?>
+                                                            </option>
+                                                        <?php endwhile; ?>
+                                                    </select>
+                                                </div>
 
-            <div class="form-group">
-                <label>Cargo</label>
-                <select name="cargo" class="form-control" required>
-                    <option value="" disabled selected>Seleccionar cargo</option>
-                    <option value="Guarda de Seguridad">Guarda de Seguridad</option>
-                    <option value="Supervisor">Supervisor</option>
-                    <option value="Ingeniero">Ingeniero</option>
-                </select>
-            </div>
+                                                <div class="form-group">
+                                                    <label>Cargo</label>
+                                                    <select name="cargo" class="form-control" required>
+                                                        <option value="" disabled>Seleccionar cargo</option>
+                                                        <option value="Guarda de Seguridad"
+                                                            <?= $empleado['cargo'] == 'Guarda de Seguridad' ? 'selected' : '' ?>>Guarda de Seguridad</option>
+                                                        <option value="Supervisor" <?= $empleado['cargo'] == 'Supervisor' ? 'selected' : '' ?>>Supervisor</option>
+                                                        <option value="Ingeniero" <?= $empleado['cargo'] == 'Ingeniero' ? 'selected' : '' ?>>Ingeniero</option>
+                                                    </select>
+                                                </div>
 
-            <div class="form-group">
-                <label>Sueldo</label>
-                <select name="sueldo" class="form-control">
-                    <option value="" disabled selected>Seleccionar tipo de sueldo</option>
-                    <option value="Salario Básico + Horas Extras">Salario Básico + Horas Extras</option>
-                    <option value="Salario Básico">Salario Básico</option>
-                    <option value="Salario Profesional">Salario Profesional</option>
-                    <option value="Salario Supervisor">Salario Supervisor</option>
-                </select>
-            </div>
+                                                <div class="form-group">
+                                                    <label>Sueldo</label>
+                                                    <select name="sueldo" class="form-control">
+                                                        <option value="" disabled>Seleccionar tipo de sueldo</option>
+                                                        <option value="Salario Básico + Horas Extras"
+                                                            <?= $empleado['sueldo'] == 'Salario Básico + Horas Extras' ? 'selected' : '' ?>>Salario Básico + Horas Extras</option>
+                                                        <option value="Salario Básico" <?= $empleado['sueldo'] == 'Salario Básico' ? 'selected' : '' ?>>Salario Básico</option>
+                                                        <option value="Salario Profesional"
+                                                            <?= $empleado['sueldo'] == 'Salario Profesional' ? 'selected' : '' ?>>Salario Profesional</option>
+                                                        <option value="Salario Supervisor"
+                                                            <?= $empleado['sueldo'] == 'Salario Supervisor' ? 'selected' : '' ?>>Salario Supervisor</option>
+                                                    </select>
+                                                </div>
 
-            <div class="form-group">
-                <label>Fecha de Ingreso</label>
-                <input name="fecha_ingreso" type="date" class="form-control">
-            </div>
+                                                <div class="form-group">
+                                                    <label>Fecha de Ingreso</label>
+                                                    <input name="fecha_ingreso" type="date" class="form-control"
+                                                        value="<?= $empleado['fecha_ingreso'] ?>">
+                                                </div>
 
-            <div class="form-group">
-                <label>Estado del Empleado</label>
-                <select name="estado" class="form-control">
-                    <option value="" disabled selected>Seleccionar estado</option>
-                    <option value="Activo">Activo</option>
-                    <option value="Inactivo">Inactivo</option>
-                </select>
-            </div>
-        </div>
-    </div>
+                                                <div class="form-group">
+                                                    <label>Estado del Empleado</label>
+                                                    <select name="estado" class="form-control">
+                                                        <option value="" disabled>Seleccionar estado</option>
+                                                        <option value="Activo" <?= $empleado['estado'] == 'Activo' ? 'selected' : '' ?>>Activo</option>
+                                                        <option value="Inactivo" <?= $empleado['estado'] == 'Inactivo' ? 'selected' : '' ?>>Inactivo</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
 
-    <div class="text-center mt-3">
-        <button type="submit" class="btn btn-primary" id="submitBtn">Actualizar Empleado</button>
-    </div>
-</form>
+                                        <div class="text-center mt-3">
+                                            <button type="submit" class="btn btn-primary" id="submitBtn">Actualizar
+                                                Empleado</button>
+                                        </div>
+                                    </form>
+
 
                                 </div>
 
@@ -717,11 +745,11 @@ if (!$lugares) {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="footer-copy-right">
-                            <p>Copyright © 2025.  <a href="https://proliseg.com">PROLISEG LTDA</a></p>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="footer-copy-right">
+                                <p>Copyright © 2025. <a href="https://proliseg.com">PROLISEG LTDA</a></p>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
