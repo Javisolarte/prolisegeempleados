@@ -75,18 +75,11 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
-    echo "<script>
-        var respuesta = confirm('¿Deseas agregar otro empleado?');
-        if (respuesta) {
-            window.location.href = 'agregar_empleado.html';
-        } else {
-            alert('Empleado registrado exitosamente.');
-            window.location.href = 'todos-empleados.html';
-        }
-    </script>";
-    exit; // Importante: evita que el script siga y se repita la inserción
+    // Redirigir con mensaje por GET para evitar reenvío
+    header("Location: todos-empleados.html?registrado=1");
+    exit;
 } else {
-    if ($stmt->errno == 1062) { // Error de clave duplicada
+    if ($stmt->errno == 1062) {
         echo "Error: Ya existe un empleado con la cédula '$cedula'.";
     } else {
         echo "Error al guardar en la base de datos: " . $stmt->error;
