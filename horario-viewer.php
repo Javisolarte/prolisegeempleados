@@ -291,26 +291,19 @@
         <?php
 include 'db_config.php';
 
-// Obtener el mes actual en español
+// Traducción de meses al español
 $meses = [
-    'January' => 'Enero',
-    'February' => 'Febrero',
-    'March' => 'Marzo',
-    'April' => 'Abril',
-    'May' => 'Mayo',
-    'June' => 'Junio',
-    'July' => 'Julio',
-    'August' => 'Agosto',
-    'September' => 'Septiembre',
-    'October' => 'Octubre',
-    'November' => 'Noviembre',
-    'December' => 'Diciembre'
+    'January' => 'Enero', 'February' => 'Febrero', 'March' => 'Marzo',
+    'April' => 'Abril', 'May' => 'Mayo', 'June' => 'Junio',
+    'July' => 'Julio', 'August' => 'Agosto', 'September' => 'Septiembre',
+    'October' => 'Octubre', 'November' => 'Noviembre', 'December' => 'Diciembre'
 ];
 
+// Mes actual
 $mes_actual_en = date("F");
-$mes_actual = $meses[$mes_actual_en]; // Traducción
+$mes_actual = $meses[$mes_actual_en];
 
-// Buscar en la base de datos el horario de este mes
+// Obtener horario del mes actual
 $stmt = $conexion->prepare("SELECT ruta_horario FROM horarios WHERE mes = ? ORDER BY fecha_subida DESC LIMIT 1");
 $stmt->bind_param("s", $mes_actual);
 $stmt->execute();
@@ -321,16 +314,21 @@ if ($fila = $resultado->fetch_assoc()) {
     $ruta_archivo = $fila['ruta_horario'];
 }
 $stmt->close();
+
+// Obtener historial completo
+$historico = $conexion->query("SELECT mes, ruta_horario, fecha_subida FROM horarios ORDER BY fecha_subida DESC");
 ?>
 
+<!-- Área de visor PDF para el mes actual -->
 <div class="pdf-viewer-area mg-b-15">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                 <div class="pdf-single-pro">
+                    <h3>Horario del mes de <?= $mes_actual ?></h3>
                     <?php if ($ruta_archivo): ?>
-                        <a class="media" href="<?= $ruta_archivo ?>"></a>
+                        <a class="media" href="<?= $ruta_archivo ?>" target="_blank">Ver horario</a>
                     <?php else: ?>
                         <p>No hay horario disponible para el mes de <strong><?= $mes_actual ?></strong>.</p>
                     <?php endif; ?>
@@ -340,6 +338,33 @@ $stmt->close();
         </div>
     </div>
 </div>
+
+<!-- Tabla de histórico de horarios -->
+<div class="container">
+    <h3>Histórico de horarios</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Mes</th>
+                <th>Fecha de subida</th>
+                <th>Archivo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($fila = $historico->fetch_assoc()): ?>
+                <tr>
+                    <td><?= htmlspecialchars($fila['mes']) ?></td>
+                    <td><?= date("d/m/Y", strtotime($fila['fecha_subida'])) ?></td>
+                    <td>
+                        <a href="<?= htmlspecialchars($fila['ruta_horario']) ?>" download>Descargar</a>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+</div>
+
+        
 
         <div class="footer-copyright-area">
             <div class="container-fluid">
@@ -353,68 +378,68 @@ $stmt->close();
             </div>
         </div>
     </div>
-<!-- jQuery -->
-<script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- jQuery -->
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
 
-<!-- Bootstrap -->
-<script src="js/bootstrap.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
 
-<!-- WOW.js -->
-<script src="js/wow.min.js"></script>
+    <!-- WOW.js -->
+    <script src="js/wow.min.js"></script>
 
-<!-- Price Slider -->
-<script src="js/jquery-price-slider.js"></script>
+    <!-- Price Slider -->
+    <script src="js/jquery-price-slider.js"></script>
 
-<!-- MeanMenu -->
-<script src="js/jquery.meanmenu.js"></script>
+    <!-- MeanMenu -->
+    <script src="js/jquery.meanmenu.js"></script>
 
-<!-- Owl Carousel -->
-<script src="js/owl.carousel.min.js"></script>
+    <!-- Owl Carousel -->
+    <script src="js/owl.carousel.min.js"></script>
 
-<!-- Sticky -->
-<script src="js/jquery.sticky.js"></script>
+    <!-- Sticky -->
+    <script src="js/jquery.sticky.js"></script>
 
-<!-- ScrollUp -->
-<script src="js/jquery.scrollUp.min.js"></script>
+    <!-- ScrollUp -->
+    <script src="js/jquery.scrollUp.min.js"></script>
 
-<!-- CounterUp -->
-<script src="js/counterup/jquery.counterup.min.js"></script>
-<script src="js/counterup/waypoints.min.js"></script>
-<script src="js/counterup/counterup-active.js"></script>
+    <!-- CounterUp -->
+    <script src="js/counterup/jquery.counterup.min.js"></script>
+    <script src="js/counterup/waypoints.min.js"></script>
+    <script src="js/counterup/counterup-active.js"></script>
 
-<!-- Custom Scrollbar -->
-<script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- Custom Scrollbar -->
+    <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/scrollbar/mCustomScrollbar-active.js"></script>
 
-<!-- MetisMenu -->
-<script src="js/metisMenu/metisMenu.min.js"></script>
-<script src="js/metisMenu/metisMenu-active.js"></script>
+    <!-- MetisMenu -->
+    <script src="js/metisMenu/metisMenu.min.js"></script>
+    <script src="js/metisMenu/metisMenu-active.js"></script>
 
-<!-- MorrisJS (Gráficos) -->
-<script src="js/morrisjs/raphael-min.js"></script>
-<script src="js/morrisjs/morris.js"></script>
-<script src="js/morrisjs/morris-active.js"></script>
+    <!-- MorrisJS (Gráficos) -->
+    <script src="js/morrisjs/raphael-min.js"></script>
+    <script src="js/morrisjs/morris.js"></script>
+    <script src="js/morrisjs/morris-active.js"></script>
 
-<!-- Sparkline (Gráficos pequeños) -->
-<script src="js/sparkline/jquery.sparkline.min.js"></script>
-<script src="js/sparkline/jquery.charts-sparkline.js"></script>
-<script src="js/sparkline/sparkline-active.js"></script>
+    <!-- Sparkline (Gráficos pequeños) -->
+    <script src="js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="js/sparkline/jquery.charts-sparkline.js"></script>
+    <script src="js/sparkline/sparkline-active.js"></script>
 
-<!-- Calendario -->
-<script src="js/calendar/moment.min.js"></script>
-<script src="js/calendar/fullcalendar.min.js"></script>
-<script src="js/calendar/fullcalendar-active.js"></script>
+    <!-- Calendario -->
+    <script src="js/calendar/moment.min.js"></script>
+    <script src="js/calendar/fullcalendar.min.js"></script>
+    <script src="js/calendar/fullcalendar-active.js"></script>
 
-<!-- PDF Viewer -->
-<script src="js/pdf/jquery.media.js"></script>
-<script src="js/pdf/pdf-active.js"></script>
+    <!-- PDF Viewer -->
+    <script src="js/pdf/jquery.media.js"></script>
+    <script src="js/pdf/pdf-active.js"></script>
 
-<!-- Tabs -->
-<script src="js/tab.js"></script>
+    <!-- Tabs -->
+    <script src="js/tab.js"></script>
 
-<!-- Plugins y Main -->
-<script src="js/plugins.js"></script>
-<script src="js/main.js"></script>
+    <!-- Plugins y Main -->
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
 
 
 </body>
