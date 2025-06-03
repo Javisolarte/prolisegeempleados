@@ -70,54 +70,64 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- Start Left menu area -->
-     <div class="mobile-menu-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="mobile-menu">
-                                <nav id="dropdown">
-                                    <ul class="mobile-menu-nav">
-                                        <li>
-                                            <a href="index-admin.php">Inicio</a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="collapse" data-target="#menuEmpleados" href="#">Empleados
-                                                <span class="admin-project-icon edu-icon edu-down-arrow"></span>
-                                            </a>
-                                            <ul id="menuEmpleados" class="collapse dropdown-header-top">
-                                                <li><a href="todos-empleados.php">Todos los empleados</a></li>
-                                                <li><a href="agregar-empleado.php">Agregar empleado</a></li>
-
-
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="collapse" data-target="#menuLugares" href="#">Lugares
-                                                <span class="admin-project-icon edu-icon edu-down-arrow"></span>
-                                            </a>
-                                            <ul id="menuLugares" class="collapse dropdown-header-top">
-                                                <li><a href="todos-lugares.php">Todos los lugares</a></li>
-                                                <li><a href="agregar-lugar.php">Agregar lugar</a></li>
-
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="collapse" data-target="#menuHorarios" href="#">Horarios
-                                                <span class="admin-project-icon edu-icon edu-down-arrow"></span>
-                                            </a>
-                                            <ul id="menuLugares" class="collapse dropdown-header-top">
-                                                <li><a href="horario-viewer.php">Horarios</a></li>
-                                                <li><a href="agregar-horario">Agregar horarios</a></li>
-
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+            <div class="sidebar-header">
+                <a href="index-admin-php"><img class="main-logo" src="img/logo/logosn.png" style="height: 100px;"
+                        alt="" /></a> <br><br>
+                <strong><a href="index-user-html"><img src="img/logo/logosn.png" alt="" /></a></strong>
             </div>
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li>
+                            <a title="Inicio" href="index-admin.php" aria-expanded="false">
+                                <span class="educate-icon educate-home icon-wrap" aria-hidden="true"></span>
+                                <span class="mini-click-non">Inicio</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="todos-empleados.php" aria-expanded="false">
+                                <span class="educate-icon educate-student icon-wrap"></span>
+                                <span class="mini-click-non">Empleados</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Todos los empleados" href="todos-empleados.php"><span
+                                            class="mini-sub-pro">Todos los empleados</span></a></li>
+                                <li><a title="Agregar empleado" href="agregar-empleado.php"><span
+                                            class="mini-sub-pro">Agregar empleado</span></a></li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="todos-lugares.php" aria-expanded="false">
+                                <span class="educate-icon educate-course icon-wrap"></span>
+                                <span class="mini-click-non">Lugares</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Todos los lugares" href="todos-lugares.php"><span
+                                            class="mini-sub-pro">Todos los lugares</span></a></li>
+                                <li><a title="Agregar lugar" href="agregar-lugar.php"><span class="mini-sub-pro">Agregar
+                                            lugar</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="todos-lugares.php" aria-expanded="false">
+                                <span class="educate-icon educate-library icon-wrap"></span>
+                                <span class="mini-click-non">Horarios</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Ver horario" href="horario-viewer.php"><span
+                                            class="mini-sub-pro">Horarios</span></a></li>
+                                <li><a title="Agregar horario" href="agregar-horario.php"><span
+                                            class="mini-sub-pro">Agregar horario</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </div>
 
     <!-- End Left menu area -->
     <!-- Start Welcome area -->
@@ -225,6 +235,16 @@
                                             <ul id="menuLugares" class="collapse dropdown-header-top">
                                                 <li><a href="todos-lugares.php">Todos los lugares</a></li>
                                                 <li><a href="agregar-lugar.php">Agregar lugar</a></li>
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="collapse" data-target="#menuHorarios" href="#">Horarios
+                                                <span class="admin-project-icon edu-icon edu-down-arrow"></span>
+                                            </a>
+                                            <ul id="menuLugares" class="collapse dropdown-header-top">
+                                                <li><a href="horario-viewer.php">Horarios</a></li>
+                                                <li><a href="agregar-horario">Agregar horarios</a></li>
 
                                             </ul>
                                         </li>
