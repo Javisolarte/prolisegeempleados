@@ -381,6 +381,7 @@ if ($resultado && $resultado->num_rows > 0) {
                         <span class="lugar-texto" title="' . $lugar . '">' . $lugar . '</span>
                     </p>
                 </div>
+                <br><br>
                 <div class="product-buttons text-center">
                     <a href="perfil-empleado.php?cedula=' . $cedula . '">
                         <button type="button" class="button-default cart-btn">Ver más</button>
