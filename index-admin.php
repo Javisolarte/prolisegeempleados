@@ -425,13 +425,12 @@ $horario_actual = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT ruta_horari
                     <div class="portlet-title">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="caption pro-sl-hd">
-                                    <span class="caption-subject"><b>BIENVENIDO PROLISEG LTDA </b></span>
-                                    <span class="caption-subject"><b>PROFESIONALES Y LIDERES EN SEGURIDAD</b></span>
-                                    <span class="caption-subject"><b>PANEL ADMINISTRADOR  </b></span>
+                               <div class="caption pro-sl-hd text-center">
+    <h2 style="font-weight: bold; margin-bottom: 10px; color: #2E86C1;">BIENVENIDO A PROLISEG LTDA</h2>
+    <h4 style="font-weight: 500; color: #117864;">Profesionales y Líderes en Seguridad</h4>
+    <h5 style="color: #5D6D7E; font-style: italic;">Panel de Administración - Dashboard Principal</h5>
+</div>
 
-
-                                </div>
                             </div>
                         </div>
                     </div>
