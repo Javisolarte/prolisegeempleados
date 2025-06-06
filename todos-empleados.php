@@ -324,8 +324,10 @@ if ($resultado && $resultado->num_rows > 0) {
         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 empleado-card">
             <div class="courses-inner res-mg-b-30">
                 <div class="courses-title text-center">
-                    <a href="#"><img src="' . $foto . '" alt="Foto de ' . $nombre . '" style="height: 200px; object-fit: cover; border-radius: 50%; width: 200px;"></a>
-                    <h4>' . $nombre . '</h4>
+                    
+                <a href="#"><img src="' . $foto . '" alt="Foto de ' . $nombre . '" style="height: 200px; object-fit: cover; border-radius: 50%; width: 200px;"></a>
+                <br><br>   
+                <h4>' . $nombre . '</h4>
                 </div>
                 <div class="courses-alaltic text-center">
                     <span class="cr-ic-r">
@@ -339,6 +341,7 @@ if ($resultado && $resultado->num_rows > 0) {
                     <p><span><i class="fa fa-user"></i></span> <b>Experiencia:</b> ' . $experiencia . '</p>
                     <p><span><i class="fa fa-building"></i></span> <b>Lugar:</b> ' . $lugar . '</p>
                 </div>
+                <br><br> 
                 <div class="product-buttons text-center">
                     <a href="perfil-empleado.php?cedula=' . $cedula . '">
                         <button type="button" class="button-default cart-btn">Ver más</button>
