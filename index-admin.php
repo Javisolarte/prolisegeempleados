@@ -461,10 +461,7 @@
                                                                         class="btn btn-warning text-white">
                                                                         <i class="fa fa-map-marker"></i> Ver Lugares
                                                                     </a>
-                                                                    <a href="#estadisticas"
-                                                                        class="btn btn-warning text-white">
-                                                                        <i class="fa fa-bar-chart"></i> Ver Estadísticas
-                                                                    </a>
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
