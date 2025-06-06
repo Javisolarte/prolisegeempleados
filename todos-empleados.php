@@ -255,87 +255,77 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Mobile Menu end -->
-            <div class="breadcome-area">
-                <div class="container-fluid">
+<!-- Mobile Menu end -->
+<div class="breadcome-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list">
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Buscar..."
-                                                    class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
-                                            <li><a href="index-admin.php">Inicio</a> <span class="bread-slash">/</span>
-                                            </li>
-
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcome-heading">
+                                <form role="search" class="sr-input-func">
+                                    <input type="text" placeholder="Buscar..." class="search-int form-control" id="searchInput">
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </form>
                             </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <ul class="breadcome-menu">
+                                <li><a href="index-admin.php">Inicio</a> <span class="bread-slash">/</span></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Welcome area -->
-        <?php
-        include('db_config.php');
+    </div>
+</div>
 
-        // Consulta todos los empleados junto con su lugar asignado
-        $sql = "SELECT 
-            e.nombre, 
-            e.cedula, 
-            e.fecha_nacimiento, 
-            e.foto_perfil_ruta, 
-            e.experiencia, 
-            e.puesto_asignado,
-            l.nombre AS lugar_nombre,
-            l.telefono AS lugar_telefono
-        FROM empleados e
-        LEFT JOIN lugares_seguridad l ON e.puesto_asignado = l.id_lugar";
+<?php
+include('db_config.php');
 
-        $resultado = $conexion->query($sql);
+$sql = "SELECT 
+    e.nombre, 
+    e.cedula, 
+    e.fecha_nacimiento, 
+    e.foto_perfil_ruta, 
+    e.experiencia, 
+    e.puesto_asignado,
+    l.nombre AS lugar_nombre,
+    l.telefono AS lugar_telefono
+FROM empleados e
+LEFT JOIN lugares_seguridad l ON e.puesto_asignado = l.id_lugar";
 
-        if ($resultado && $resultado->num_rows > 0) {
-            echo '<div class="courses-area"><div class="container-fluid"><div class="row">';
+$resultado = $conexion->query($sql);
 
-            while ($empleado = $resultado->fetch_assoc()) {
-                // Calcular la edad desde la fecha de nacimiento
-                $edad = '';
-                if (!empty($empleado['fecha_nacimiento'])) {
-                    $fecha_nac = new DateTime($empleado['fecha_nacimiento']);
-                    $hoy = new DateTime();
-                    $edad = $hoy->diff($fecha_nac)->y . ' años';
-                }
+if ($resultado && $resultado->num_rows > 0) {
+    echo '<div class="courses-area"><div class="container-fluid"><div class="row" id="empleadoContainer">';
 
-                // Ruta de imagen
-                $foto = (!empty($empleado['foto_perfil_ruta']) && file_exists($empleado['foto_perfil_ruta']))
-                    ? $empleado['foto_perfil_ruta']
-                    : 'img/usuario.png'; // Imagen por defecto
-        
-                // Datos del empleado y lugar
-                $nombre = htmlspecialchars($empleado['nombre']);
-                $cedula = urlencode($empleado['cedula']);
-                $experiencia = !empty($empleado['experiencia']) ? htmlspecialchars($empleado['experiencia']) : 'Sin especificar';
-                $lugar = !empty($empleado['lugar_nombre']) ? htmlspecialchars($empleado['lugar_nombre']) : 'No asignado';
-                $telefono = !empty($empleado['lugar_telefono']) ? htmlspecialchars($empleado['lugar_telefono']) : 'Sin teléfono';
+    while ($empleado = $resultado->fetch_assoc()) {
+        $edad = '';
+        if (!empty($empleado['fecha_nacimiento'])) {
+            $fecha_nac = new DateTime($empleado['fecha_nacimiento']);
+            $hoy = new DateTime();
+            $edad = $hoy->diff($fecha_nac)->y . ' años';
+        }
 
-                echo '
-        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+        $foto = (!empty($empleado['foto_perfil_ruta']) && file_exists($empleado['foto_perfil_ruta']))
+            ? $empleado['foto_perfil_ruta']
+            : 'img/usuario.png';
+
+        $nombre = htmlspecialchars($empleado['nombre']);
+        $cedula = urlencode($empleado['cedula']);
+        $experiencia = !empty($empleado['experiencia']) ? htmlspecialchars($empleado['experiencia']) : 'Sin especificar';
+        $lugar = !empty($empleado['lugar_nombre']) ? htmlspecialchars($empleado['lugar_nombre']) : 'No asignado';
+        $telefono = !empty($empleado['lugar_telefono']) ? htmlspecialchars($empleado['lugar_telefono']) : 'Sin teléfono';
+
+        echo '
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 empleado-card">
             <div class="courses-inner res-mg-b-30">
                 <div class="courses-title text-center">
                     <a href="#"><img src="' . $foto . '" alt="Foto de ' . $nombre . '" style="height: 200px; object-fit: cover; border-radius: 50%; width: 200px;"></a>
-                    <h2>' . $nombre . '</h2>
+                    <h4>' . $nombre . '</h4>
                 </div>
                 <div class="courses-alaltic text-center">
                     <span class="cr-ic-r">
@@ -349,26 +339,42 @@
                     <p><span><i class="fa fa-user"></i></span> <b>Experiencia:</b> ' . $experiencia . '</p>
                     <p><span><i class="fa fa-building"></i></span> <b>Lugar:</b> ' . $lugar . '</p>
                 </div>
-               <div class="product-buttons text-center">
-                        <a href="perfil-empleado.php?cedula=' . $cedula . '">
-                            <button type="button" class="button-default cart-btn">Ver mas</button>
-                        </a>
-                    </div>
+                <div class="product-buttons text-center">
+                    <a href="perfil-empleado.php?cedula=' . $cedula . '">
+                        <button type="button" class="button-default cart-btn">Ver más</button>
+                    </a>
+                </div>
             </div>
         </div>';
+    }
+
+    echo '</div></div></div>';
+} else {
+    echo "<p class='text-center'>No hay empleados registrados aún.</p>";
+}
+echo '<div class="text-center" style="margin: 20px;">
+    <a href="generar-pdf.php" target="_blank">
+        <button class="btn btn-primary">Imprimir PDF</button>
+    </a>
+</div>';
+?>
+
+<!-- JavaScript para filtrar resultados -->
+<script>
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+        const searchValue = this.value.toLowerCase();
+        const cards = document.querySelectorAll('.empleado-card');
+
+        cards.forEach(function (card) {
+            const nombre = card.querySelector('h4').textContent.toLowerCase();
+            if (nombre.includes(searchValue)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
             }
-
-            echo '</div></div></div>';
-        } else {
-            echo "<p class='text-center'>No hay empleados registrados aún.</p>";
-        }
-        echo '<div class="text-center" style="margin: 20px;">
-        <a href="generar-pdf.php" target="_blank">
-            <button class="btn btn-primary">Imprimir PDF</button>
-        </a>
-      </div>';
-
-        ?>
+        });
+    });
+</script>
 
 
         <div class="footer-copyright-area">
