@@ -256,109 +256,157 @@
                     </div>
                 </div>
             </div>
-<!-- Suponiendo que ya tienes incluido db_config.php y $conexion -->
 <?php include('db_config.php'); ?>
 <?php
-// Consultas estadísticas
+// Estadísticas generales
 $guardas = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM empleados WHERE cargo = 'Guarda de Seguridad'"))['total'];
 $total_empleados = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM empleados"))['total'];
 $total_lugares = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM lugares_seguridad"))['total'];
 
-$total_hombres = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM empleados WHERE genero = 'Masculino'"))['total'];
-$total_mujeres = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM empleados WHERE genero = 'Femenino'"))['total'];
-
 $promedio_edad = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT AVG(TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE())) as edad_promedio FROM empleados WHERE fecha_nacimiento != '0000-00-00'"))['edad_promedio'];
 
-$experiencias = mysqli_query($conexion, "SELECT experiencia, COUNT(*) as cantidad FROM empleados GROUP BY experiencia ORDER BY cantidad DESC");
-$lugares = mysqli_query($conexion, "SELECT nombre, numero_guardias FROM lugares_seguridad ORDER BY numero_guardias DESC");
+$experiencia_query = mysqli_query($conexion, "SELECT experiencia FROM empleados WHERE experiencia IS NOT NULL AND experiencia != ''");
+$total_exp = 0;
+$total_rows = 0;
+while ($row = mysqli_fetch_assoc($experiencia_query)) {
+    if (preg_match('/(\\d+)/', $row['experiencia'], $match)) {
+        $total_exp += intval($match[1]);
+        $total_rows++;
+    }
+}
+$promedio_experiencia = $total_rows > 0 ? round($total_exp / $total_rows, 1) : 0;
+
+// Por tipo de contrato
+$contratos = mysqli_query($conexion, "SELECT tipo_contrato, COUNT(*) as cantidad FROM empleados GROUP BY tipo_contrato");
+
+// Por estado
+$activos = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM empleados WHERE estado = 'Activo'"))['total'];
+$inactivos = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM empleados WHERE estado = 'Inactivo'"))['total'];
 ?>
 
 <div class="analytics-sparkle-area">
     <div class="container-fluid">
         <div class="row">
+            <!-- Primeras estadísticas -->
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="analytics-sparkle-line">
+                <div class="analytics-sparkle-line reso-mg-b-30">
                     <div class="analytics-content">
                         <h5>Total de Guardas</h5>
                         <h2><span class="counter"><?php echo $guardas; ?></span></h2>
+                        <span class="text-success">100%</span>
+                        <div class="progress m-b-0">
+                            <div class="progress-bar progress-bar-success" role="progressbar" style="width: 100%">
+                                <span class="sr-only">100% Complete</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="analytics-sparkle-line">
+                <div class="analytics-sparkle-line reso-mg-b-30">
                     <div class="analytics-content">
                         <h5>Total de Empleados</h5>
                         <h2><span class="counter"><?php echo $total_empleados; ?></span></h2>
+                        <span class="text-primary">100%</span>
+                        <div class="progress m-b-0">
+                            <div class="progress-bar progress-bar-primary" role="progressbar" style="width: 100%">
+                                <span class="sr-only">100% Complete</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="analytics-sparkle-line">
+                <div class="analytics-sparkle-line reso-mg-b-30">
                     <div class="analytics-content">
-                        <h5>Total de Lugares</h5>
+                        <h5>Total de Lugares de Seguridad</h5>
                         <h2><span class="counter"><?php echo $total_lugares; ?></span></h2>
+                        <span class="text-info">100%</span>
+                        <div class="progress m-b-0">
+                            <div class="progress-bar progress-bar-info" role="progressbar" style="width: 100%">
+                                <span class="sr-only">100% Complete</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="analytics-sparkle-line">
+                <div class="analytics-sparkle-line reso-mg-b-30">
                     <div class="analytics-content">
                         <h5>Edad Promedio</h5>
-                        <h2><span class="counter"><?php echo round($promedio_edad); ?></span> años</h2>
+                        <h2><span class="counter"><?php echo round($promedio_edad); ?></span> <span class="tuition-fees">años</span></h2>
+                        <span class="text-warning">Edad</span>
+                        <div class="progress m-b-0">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" style="width: 100%">
+                                <span class="sr-only">100% Complete</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="analytics-sparkle-line">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="analytics-sparkle-line reso-mg-b-30">
                     <div class="analytics-content">
-                        <h5>Distribución por Género</h5>
-                        <p>Hombres: <?php echo $total_hombres; ?> | Mujeres: <?php echo $total_mujeres; ?></p>
+                        <h5>Promedio de Experiencia</h5>
+                        <h2><span class="counter"><?php echo $promedio_experiencia; ?></span> <span class="tuition-fees">años</span></h2>
+                        <span class="text-danger">Experiencia</span>
+                        <div class="progress m-b-0">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" style="width: 100%">
+                                <span class="sr-only">100% Complete</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="analytics-sparkle-line">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="analytics-sparkle-line reso-mg-b-30">
                     <div class="analytics-content">
-                        <h5>Experiencia de Empleados</h5>
-                        <ul>
-                            <?php while($exp = mysqli_fetch_assoc($experiencias)) { ?>
-                                <li><?php echo $exp['experiencia']; ?>: <?php echo $exp['cantidad']; ?></li>
-                            <?php } ?>
-                        </ul>
+                        <h5>Empleados Activos</h5>
+                        <h2><span class="counter"><?php echo $activos; ?></span></h2>
+                        <span class="text-info">Activos</span>
+                        <div class="progress m-b-0">
+                            <div class="progress-bar progress-bar-info" role="progressbar" style="width: 100%">
+                                <span class="sr-only">100% Complete</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="analytics-sparkle-line">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="analytics-sparkle-line reso-mg-b-30">
                     <div class="analytics-content">
-                        <h5>Guardias por Lugar</h5>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Lugar</th>
-                                    <th># Guardias</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php while($lugar = mysqli_fetch_assoc($lugares)) { ?>
-                                <tr>
-                                    <td><?php echo $lugar['nombre']; ?></td>
-                                    <td><?php echo $lugar['numero_guardias']; ?></td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                        <h5>Empleados Inactivos</h5>
+                        <h2><span class="counter"><?php echo $inactivos; ?></span></h2>
+                        <span class="text-muted">Inactivos</span>
+                        <div class="progress m-b-0">
+                            <div class="progress-bar progress-bar-default" role="progressbar" style="width: 100%">
+                                <span class="sr-only">100% Complete</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <?php while($contrato = mysqli_fetch_assoc($contratos)) { ?>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="analytics-sparkle-line reso-mg-b-30">
+                    <div class="analytics-content">
+                        <h5><?php echo $contrato['tipo_contrato']; ?></h5>
+                        <h2><span class="counter"><?php echo $contrato['cantidad']; ?></span></h2>
+                        <span class="text-primary">Contrato</span>
+                        <div class="progress m-b-0">
+                            <div class="progress-bar progress-bar-primary" role="progressbar" style="width: 100%">
+                                <span class="sr-only">100% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php } ?>
         </div>
     </div>
 </div>
-
         
         <div class="footer-copyright-area">
             <div class="container-fluid">
