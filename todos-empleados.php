@@ -265,32 +265,53 @@
         max-width: 180px;
         vertical-align: middle;
     }
+
+    #empleadoContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 20px;
+    }
+
+    .empleado-card {
+        flex: 1 1 calc(25% - 20px); /* 4 por fila con espacio */
+        max-width: calc(25% - 20px);
+    }
+
+    @media (max-width: 992px) {
+        .empleado-card {
+            flex: 1 1 calc(50% - 20px);
+            max-width: calc(50% - 20px);
+        }
+    }
+
+    @media (max-width: 576px) {
+        .empleado-card {
+            flex: 1 1 100%;
+            max-width: 100%;
+        }
+    }
 </style>
 
 <div class="breadcome-area">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12">
                 <div class="breadcome-list">
                     <div class="row">
-                        <!-- Campo de búsqueda -->
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-lg-6">
                             <div class="breadcome-heading">
                                 <form role="search" class="sr-input-func" style="display: flex; align-items: center; gap: 10px;">
                                     <input type="text" placeholder="Buscar..." class="search-int form-control" id="searchInput" style="max-width: 250px;">
                                     <a href="#"><i class="fa fa-search"></i></a>
-                                    
                                 </form>
                             </div>
                         </div>
-
-                        <!-- Breadcrumb -->
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-lg-6">
                             <ul class="breadcome-menu">
-                                
                                 <a href="generar-pdf.php" target="_blank">
-                                        <button type="button" class="btn btn-primary">Imprimir lista de empleados</button>
-                                    </a>
+                                    <button type="button" class="btn btn-primary">Imprimir lista de empleados</button>
+                                </a>
                             </ul>
                         </div>
                     </div>
@@ -339,7 +360,7 @@ if ($resultado && $resultado->num_rows > 0) {
         $telefono = !empty($empleado['lugar_telefono']) ? htmlspecialchars($empleado['lugar_telefono']) : 'Sin teléfono';
 
         echo '
-        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 empleado-card">
+        <div class="empleado-card">
             <div class="courses-inner res-mg-b-30">
                 <div class="courses-title text-center">
                     <a href="#"><img src="' . $foto . '" alt="Foto de ' . $nombre . '" style="height: 200px; object-fit: cover; border-radius: 50%; width: 200px;"></a>
@@ -360,7 +381,6 @@ if ($resultado && $resultado->num_rows > 0) {
                         <span class="lugar-texto" title="' . $lugar . '">' . $lugar . '</span>
                     </p>
                 </div>
-                 <br><br><br>
                 <div class="product-buttons text-center">
                     <a href="perfil-empleado.php?cedula=' . $cedula . '">
                         <button type="button" class="button-default cart-btn">Ver más</button>
@@ -375,6 +395,7 @@ if ($resultado && $resultado->num_rows > 0) {
     echo "<p class='text-center'>No hay empleados registrados aún.</p>";
 }
 ?>
+
 
 <!-- JavaScript para filtrar resultados -->
 <script>
