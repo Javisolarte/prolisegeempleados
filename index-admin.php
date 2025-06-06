@@ -405,6 +405,86 @@ $inactivos = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as tota
                 </div>
             </div>
             <?php } ?>
+
+            <?php include('db_config.php'); ?>
+<?php
+// Estadísticas generales...
+// (Ya incluidas previamente)
+
+// Datos para mostrar abajo
+$top_lugares = mysqli_query($conexion, "SELECT nombre, direccion, numero_guardias FROM lugares_seguridad ORDER BY numero_guardias DESC LIMIT 5");
+$horario_actual = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT ruta_horario FROM horarios ORDER BY id DESC LIMIT 1"));
+?>
+
+<!-- Sección extendida debajo de las tarjetas -->
+<div class="product-sales-area mg-tb-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-sales-chart">
+                    <div class="portlet-title">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="caption pro-sl-hd">
+                                    <span class="caption-subject"><b>Top 5 Lugares con más Guardias</b></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Lugar</th>
+                                <th>Dirección</th>
+                                <th># Guardias</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while($lugar = mysqli_fetch_assoc($top_lugares)) { ?>
+                            <tr>
+                                <td><?php echo $lugar['nombre']; ?></td>
+                                <td><?php echo $lugar['direccion']; ?></td>
+                                <td><?php echo $lugar['numero_guardias']; ?></td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="white-box analytics-info-cs mg-b-10">
+                    <h3 class="box-title">Descargar Datos</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a class="btn btn-primary btn-block" href="<?php echo $horario_actual ? $horario_actual['ruta_horario'] : '#'; ?>" download>
+                                Descargar Horario Actual
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="btn btn-success btn-block" href="generar-pdf.php" target="_blank">
+                                Descargar Lista de Empleados (PDF)
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="btn btn-info btn-block" href="generar-pdf-lugares.php" target="_blank">
+                                Descargar Lista de Lugares (PDF)
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="white-box analytics-info-cs">
+                    <h3 class="box-title">Resumen Rápido</h3>
+                    <p><strong>Total de Guardias:</strong> <?php echo $guardas; ?></p>
+                    <p><strong>Edad Promedio:</strong> <?php echo round($promedio_edad); ?> años</p>
+                    <p><strong>Experiencia Promedio:</strong> <?php echo $promedio_experiencia; ?> años</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Puedes agregar más bloques aquí como reportes mensuales, alertas o novedades -->
+
         </div>
     </div>
 </div>
