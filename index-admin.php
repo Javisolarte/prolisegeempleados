@@ -287,6 +287,7 @@ $inactivos = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as tota
 <div class="analytics-sparkle-area">
     <div class="container-fluid">
         <div class="row">
+            <br><br><br><br>
             <!-- Primeras estadísticas -->
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="analytics-sparkle-line reso-mg-b-30">
