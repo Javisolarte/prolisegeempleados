@@ -279,9 +279,7 @@
                                 <form role="search" class="sr-input-func" style="display: flex; align-items: center; gap: 10px;">
                                     <input type="text" placeholder="Buscar..." class="search-int form-control" id="searchInput" style="max-width: 250px;">
                                     <a href="#"><i class="fa fa-search"></i></a>
-                                    <a href="generar-pdf.php" target="_blank">
-                                        <button type="button" class="btn btn-primary">Imprimir PDF</button>
-                                    </a>
+                                    
                                 </form>
                             </div>
                         </div>
@@ -290,6 +288,9 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <ul class="breadcome-menu">
                                 <li><a href="index-admin.php">Inicio</a> <span class="bread-slash">/</span></li>
+                                <a href="generar-pdf.php" target="_blank">
+                                        <button type="button" class="btn btn-primary">Imprimir PDF</button>
+                                    </a>
                             </ul>
                         </div>
                     </div>
@@ -359,7 +360,7 @@ if ($resultado && $resultado->num_rows > 0) {
                         <span class="lugar-texto" title="' . $lugar . '">' . $lugar . '</span>
                     </p>
                 </div>
-                <br><br> 
+                 
                 <div class="product-buttons text-center">
                     <a href="perfil-empleado.php?cedula=' . $cedula . '">
                         <button type="button" class="button-default cart-btn">Ver más</button>
