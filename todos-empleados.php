@@ -254,22 +254,39 @@
                         </div>
                     </div>
                 </div>
-            </div>
-<!-- Mobile Menu end -->
+            </div><!-- Mobile Menu end -->
+<style>
+    .lugar-texto {
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        max-width: 180px;
+        vertical-align: middle;
+    }
+</style>
+
 <div class="breadcome-area">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="breadcome-list">
                     <div class="row">
+                        <!-- Campo de búsqueda -->
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="breadcome-heading">
-                                <form role="search" class="sr-input-func">
-                                    <input type="text" placeholder="Buscar..." class="search-int form-control" id="searchInput">
+                                <form role="search" class="sr-input-func" style="display: flex; align-items: center; gap: 10px;">
+                                    <input type="text" placeholder="Buscar..." class="search-int form-control" id="searchInput" style="max-width: 250px;">
                                     <a href="#"><i class="fa fa-search"></i></a>
+                                    <a href="generar-pdf.php" target="_blank">
+                                        <button type="button" class="btn btn-primary">Imprimir PDF</button>
+                                    </a>
                                 </form>
                             </div>
                         </div>
+
+                        <!-- Breadcrumb -->
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <ul class="breadcome-menu">
                                 <li><a href="index-admin.php">Inicio</a> <span class="bread-slash">/</span></li>
@@ -324,10 +341,9 @@ if ($resultado && $resultado->num_rows > 0) {
         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 empleado-card">
             <div class="courses-inner res-mg-b-30">
                 <div class="courses-title text-center">
-                    
-                <a href="#"><img src="' . $foto . '" alt="Foto de ' . $nombre . '" style="height: 200px; object-fit: cover; border-radius: 50%; width: 200px;"></a>
-                <br><br>   
-                <h4>' . $nombre . '</h4>
+                    <a href="#"><img src="' . $foto . '" alt="Foto de ' . $nombre . '" style="height: 200px; object-fit: cover; border-radius: 50%; width: 200px;"></a>
+                    <br><br>   
+                    <h4>' . $nombre . '</h4>
                 </div>
                 <div class="courses-alaltic text-center">
                     <span class="cr-ic-r">
@@ -339,7 +355,9 @@ if ($resultado && $resultado->num_rows > 0) {
                 </div>
                 <div class="course-des">
                     <p><span><i class="fa fa-user"></i></span> <b>Experiencia:</b> ' . $experiencia . '</p>
-                    <p><span><i class="fa fa-building"></i></span> <b>Lugar:</b> ' . $lugar . '</p>
+                    <p><span><i class="fa fa-building"></i></span> <b>Lugar:</b> 
+                        <span class="lugar-texto" title="' . $lugar . '">' . $lugar . '</span>
+                    </p>
                 </div>
                 <br><br> 
                 <div class="product-buttons text-center">
@@ -355,11 +373,6 @@ if ($resultado && $resultado->num_rows > 0) {
 } else {
     echo "<p class='text-center'>No hay empleados registrados aún.</p>";
 }
-echo '<div class="text-center" style="margin: 20px;">
-    <a href="generar-pdf.php" target="_blank">
-        <button class="btn btn-primary">Imprimir PDF</button>
-    </a>
-</div>';
 ?>
 
 <!-- JavaScript para filtrar resultados -->
@@ -370,15 +383,10 @@ echo '<div class="text-center" style="margin: 20px;">
 
         cards.forEach(function (card) {
             const nombre = card.querySelector('h4').textContent.toLowerCase();
-            if (nombre.includes(searchValue)) {
-                card.style.display = '';
-            } else {
-                card.style.display = 'none';
-            }
+            card.style.display = nombre.includes(searchValue) ? '' : 'none';
         });
     });
 </script>
-
 
         <div class="footer-copyright-area">
             <div class="container-fluid">
