@@ -426,29 +426,12 @@ $horario_actual = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT ruta_horari
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="caption pro-sl-hd">
-                                    <span class="caption-subject"><b>Top 5 Lugares con más Guardias</b></span>
+                                    <span class="caption-subject"><b>Bienvenido a PROLISEG LTDA </b></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Lugar</th>
-                                <th>Dirección</th>
-                                <th># Guardias</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php while($lugar = mysqli_fetch_assoc($top_lugares)) { ?>
-                            <tr>
-                                <td><?php echo $lugar['nombre']; ?></td>
-                                <td><?php echo $lugar['direccion']; ?></td>
-                                <td><?php echo $lugar['numero_guardias']; ?></td>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                   
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
