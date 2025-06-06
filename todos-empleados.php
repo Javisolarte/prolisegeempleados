@@ -258,14 +258,14 @@
 <style>
     .lugar-texto {
         font-size: 12px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
         display: inline-block;
         max-width: 180px;
+        word-wrap: break-word;
+        white-space: normal;
         vertical-align: middle;
     }
 </style>
+
 
 <div class="breadcome-area">
     <div class="container-fluid">
