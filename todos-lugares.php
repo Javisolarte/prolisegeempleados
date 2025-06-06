@@ -255,99 +255,123 @@
                     </div>
                 </div>
             </div>
+<style>
+    .lugar-card {
+        margin-bottom: 30px;
+    }
 
+    .search-int {
+        max-width: 250px;
+    }
+</style>
 
-            <!-- Mobile Menu end -->
-            <div class="breadcome-area">
-                <div class="container-fluid">
+<!-- Área de navegación -->
+<div class="breadcome-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list">
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Buscar..."
-                                                    class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
-                                            <li><a href="index-admin.php">Inicio</a> <span class="bread-slash">/</span>
-                                            </li>
-
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <!-- Campo de búsqueda -->
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcome-heading">
+                                <form role="search" class="sr-input-func" style="display: flex; align-items: center; gap: 10px;">
+                                    <input type="text" placeholder="Buscar..." class="search-int form-control" id="searchLugarInput">
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </form>
                             </div>
+                        </div>
+
+                        <!-- Botón de descarga -->
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
+                            <a href="generar-pdf-lugares.php" target="_blank">
+                                <button type="button" class="btn btn-primary">Imprimir lista de lugares</button>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <?php
-        // Mostrar errores
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
+    </div>
+</div>
 
-        // Conectar a la base de datos
-        include 'db_config.php';
+<?php
+// Mostrar errores
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-        // Consultar todos los lugares
-        $query = "SELECT * FROM lugares_seguridad ORDER BY id_lugar DESC";
-        $resultado = mysqli_query($conexion, $query);
-        ?>
+// Conectar a la base de datos
+include 'db_config.php';
 
-        <div class="courses-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <?php while ($lugar = mysqli_fetch_assoc($resultado)): ?>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <div class="courses-inner res-mg-t-30 dk-res-t-pro-30">
-                                <div class="courses-title">
-                                    <a href="#">
-                                        <img src="<?= htmlspecialchars($lugar['ruta_imagen']) ?>" alt="Imagen del lugar"
-                                            style="height: 200px; width: 100%; object-fit: cover;">
-                                    </a>
-                                    <h2><?= htmlspecialchars($lugar['nombre']) ?></h2>
-                                </div>
-                                <div class="courses-alaltic">
-                                    <span class="cr-ic-r">
-                                        <span class="course-icon"><i class="fa fa-video-camera"></i></span>
-                                        <?= intval($lugar['numero_camaras']) ?>
-                                    </span>
-                                    <span class="cr-ic-r">
-                                        <span class="course-icon"><i class="fa fa-user-secret"></i></span>
-                                        <?= intval($lugar['numero_guardias']) ?>
-                                    </span>
-                                    <span class="cr-ic-r">
-                                        <span class="course-icon"><i class="fa fa-phone"></i></span>
-                                        <?= htmlspecialchars($lugar['telefono']) ?>
-                                    </span>
-                                </div>
-                                <div class="course-des">
-                                    <p><b>Dirección:</b> <?= htmlspecialchars($lugar['direccion']) ?></p>
-                                    <p><b>Número de Cámaras:</b> <?= intval($lugar['numero_camaras']) ?></p>
-                                    <p><b>Número de Guardas:</b> <?= intval($lugar['numero_guardias']) ?></p>
-                                    <p><b>Teléfono:</b> <?= htmlspecialchars($lugar['telefono']) ?></p>
-                                </div>
-                                <div class="product-buttons">
-                                    <a href="info-lugar.php?nombre=<?php echo urlencode($lugar['nombre']); ?>">
-                                        <button type="button" class="button-default cart-btn">Más Información</button>
-                                    </a>
-                                </div>
-                            </div>
+// Consultar todos los lugares
+$query = "SELECT * FROM lugares_seguridad ORDER BY id_lugar DESC";
+$resultado = mysqli_query($conexion, $query);
+?>
+
+<!-- Tarjetas de lugares -->
+<div class="courses-area">
+    <div class="container-fluid">
+        <div class="row" id="lugarContainer">
+            <?php while ($lugar = mysqli_fetch_assoc($resultado)): ?>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 lugar-card">
+                    <div class="courses-inner res-mg-t-30 dk-res-t-pro-30">
+                        <div class="courses-title">
+                            <a href="#">
+                                <img src="<?= htmlspecialchars($lugar['ruta_imagen']) ?>" alt="Imagen del lugar"
+                                    style="height: 200px; width: 100%; object-fit: cover;">
+                            </a>
+                            <h2 class="lugar-nombre"><?= htmlspecialchars($lugar['nombre']) ?></h2>
                         </div>
-                    <?php endwhile; ?>
+                        <div class="courses-alaltic">
+                            <span class="cr-ic-r">
+                                <span class="course-icon"><i class="fa fa-video-camera"></i></span>
+                                <?= intval($lugar['numero_camaras']) ?>
+                            </span>
+                            <span class="cr-ic-r">
+                                <span class="course-icon"><i class="fa fa-user-secret"></i></span>
+                                <?= intval($lugar['numero_guardias']) ?>
+                            </span>
+                            <span class="cr-ic-r">
+                                <span class="course-icon"><i class="fa fa-phone"></i></span>
+                                <?= htmlspecialchars($lugar['telefono']) ?>
+                            </span>
+                        </div>
+                        <div class="course-des">
+                            <p><b>Dirección:</b> <?= htmlspecialchars($lugar['direccion']) ?></p>
+                            <p><b>Número de Cámaras:</b> <?= intval($lugar['numero_camaras']) ?></p>
+                            <p><b>Número de Guardas:</b> <?= intval($lugar['numero_guardias']) ?></p>
+                            <p><b>Teléfono:</b> <?= htmlspecialchars($lugar['telefono']) ?></p>
+                        </div>
+                        <div class="product-buttons text-center">
+                            <a href="info-lugar.php?nombre=<?= urlencode($lugar['nombre']) ?>">
+                                <button type="button" class="button-default cart-btn">Más Información</button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            <?php endwhile; ?>
         </div>
+    </div>
+</div>
 
-        <?php mysqli_close($conexion); ?>
+<?php mysqli_close($conexion); ?>
 
+<!-- Script de búsqueda -->
+<script>
+    document.getElementById("searchLugarInput").addEventListener("input", function () {
+        const filtro = this.value.toLowerCase();
+        const tarjetas = document.querySelectorAll("#lugarContainer .lugar-card");
+
+        tarjetas.forEach(card => {
+            const nombre = card.querySelector(".lugar-nombre").textContent.toLowerCase();
+            if (nombre.includes(filtro)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    });
+</script>
 
 
         <div class="footer-copyright-area">
