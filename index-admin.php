@@ -425,33 +425,30 @@ $horario_actual = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT ruta_horari
                     <div class="portlet-title">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                               <div class="caption pro-sl-hd text-center" style="padding: 30px 10px; background: linear-gradient(135deg, #1F618D, #2E86C1); color: white; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-    <h2 style="font-weight: bold; margin-bottom: 10px;">
-        <i class="fa fa-shield fa-lg" aria-hidden="true"></i> BIENVENIDO A <span style="color: #F9E79F;">PROLISEG LTDA</span>
+                               <div class="d-flex justify-content-center my-4">
+  <div style="background-color: #2874A6; color: white; padding: 30px; border-radius: 15px; width: 100%; max-width: 600px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); text-align: center;">
+    <h2 style="font-weight: bold;">
+      <i class="fa fa-shield" aria-hidden="true"></i> BIENVENIDO A 
+      <span style="color: #2874A6;">PROLISEG LTDA</span>
     </h2>
-    <h4 style="font-weight: 500; margin-bottom: 15px;">
-        Profesionales y Líderes en Seguridad Corporativa
-    </h4>
-    <p style="font-size: 16px; max-width: 600px; margin: 0 auto 20px;">
-        Este panel administrativo te permite supervisar empleados, asignaciones, horarios, lugares de vigilancia, estadísticas, reportes y mucho más.
+    <h5 style="font-weight: 400; margin: 10px 0 20px;">
+      Profesionales y Líderes en Seguridad
+    </h5>
+    <p style="max-width: 500px; margin: 0 auto 20px;">
+      Este panel administrativo te permite supervisar empleados, asignaciones, horarios, lugares de vigilancia, estadísticas, reportes y mucho más.
     </p>
-    <div class="row justify-content-center" style="margin-top: 20px;">
-        <div class="col-md-3 col-sm-6 mb-2">
-            <a href="generar-pdf.php" class="btn btn-light btn-block" style="border-radius: 25px; font-weight: bold;">
-                <i class="fa fa-users"></i> Ver Empleados
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-6 mb-2">
-            <a href="generar-pdf-lugares.php" class="btn btn-light btn-block" style="border-radius: 25px; font-weight: bold;">
-                <i class="fa fa-map-marker"></i> Ver Lugares
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-6 mb-2">
-            <a href="#estadisticas" class="btn btn-warning btn-block" style="border-radius: 25px; font-weight: bold;">
-                <i class="fa fa-bar-chart"></i> Ver Estadísticas
-            </a>
-        </div>
+    <div class="d-flex justify-content-center flex-wrap gap-2">
+      <a href="generar-pdf.php" class="btn btn-outline-light me-2">
+        <i class="fa fa-users"></i> Ver Empleados
+      </a>
+      <a href="generar-pdf-lugares.php" class="btn btn-outline-light me-2">
+        <i class="fa fa-map-marker"></i> Ver Lugares
+      </a>
+      <a href="#estadisticas" class="btn btn-warning text-white">
+        <i class="fa fa-bar-chart"></i> Ver Estadísticas
+      </a>
     </div>
+  </div>
 </div>
 
                             </div>
