@@ -29,18 +29,13 @@ $sql = "SELECT
 $resultado = $conexion->query($sql);
 
 // Construir el HTML del PDF
-$html = '<h2 style="text-align: center;">Listado de Empleados</h2>';
-
-$contador = 0;
+$html = '<h2 style="text-align: center; font-size: 16px;">Listado de Empleados</h2>';
 
 if ($resultado && $resultado->num_rows > 0) {
-    $contador = $resultado->num_rows;
-
-    $html .= "<p><strong>Total de empleados:</strong> $contador</p>";
-
-    $html .= '<table border="1" cellpadding="5" cellspacing="0" width="100%">
+    $html .= '<table border="1" cellpadding="4" cellspacing="0" width="100%" style="font-size: 12px;">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Nombre</th>
                         <th>Cédula</th>
                         <th>Edad</th>
@@ -51,6 +46,7 @@ if ($resultado && $resultado->num_rows > 0) {
                 </thead>
                 <tbody>';
 
+    $contador = 1;
     while ($empleado = $resultado->fetch_assoc()) {
         // Calcular edad
         $edad = '';
@@ -68,6 +64,7 @@ if ($resultado && $resultado->num_rows > 0) {
         $telefono    = htmlspecialchars($empleado['lugar_telefono'] ?? 'Sin teléfono');
 
         $html .= "<tr>
+                    <td>$contador</td>
                     <td>$nombre</td>
                     <td>$cedula</td>
                     <td>$edad</td>
@@ -75,11 +72,13 @@ if ($resultado && $resultado->num_rows > 0) {
                     <td>$lugar</td>
                     <td>$telefono</td>
                   </tr>";
+
+        $contador++;
     }
 
     $html .= '</tbody></table>';
 } else {
-    $html .= '<p>No hay empleados registrados.</p>';
+    $html .= '<p style="font-size: 12px;">No hay empleados registrados.</p>';
 }
 
 // Finalizar el buffer antes de enviar encabezados
@@ -87,7 +86,7 @@ ob_end_clean();
 
 // Generar el PDF
 $dompdf->loadHtml($html);
-$dompdf->setPaper('A4', 'landscape'); // Cambiar a orientación horizontal
+$dompdf->setPaper('A4', 'landscape'); // Orientación horizontal
 $dompdf->render();
 
 // Mostrar el PDF en el navegador
